@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberGipsy — Программируй в киберклубе | Владивосток</title>
+<meta name="description" content="CyberGipsy — бесплатный клуб программирования в киберспортивных клубах Владивостока. Мощные ПК, софт, комьюнити. Приходи и кодь.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent-cyan: #0891b2;
+  --accent-cyan-deep: #065f73;
+  --accent-magenta: #a21caf;
+  --accent-magenta-deep: #86198f;
+  --accent-green: #16a34a;
+  --accent-amber: #d97706;
+  --bg-white: #fafbfc;
+  --bg-light: #f1f3f5;
+  --bg-card: #ffffff;
+  --bg-dark-section: #0f172a;
+  --text-black: #0f172a;
+  --text-dark: #1e293b;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.05);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--bg-white);
+  color: var(--text-body);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+.grid-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 14px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.nav-logo {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800; font-size: 1.4rem; letter-spacing: 3px; text-transform: uppercase;
+}
+.nav-logo .cy { color: var(--accent-cyan); }
+.nav-logo .gi { color: var(--accent-magenta); }
+
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--accent-cyan); }
+
+.nav-cta {
+  background: var(--accent-cyan) !important; color: #fff !important;
+  padding: 8px 22px !important;
+  font-family: 'Orbitron', sans-serif !important; font-size: 0.7rem !important;
+  border: none !important; border-radius: 4px; cursor: pointer;
+  transition: all 0.3s !important;
+}
+.nav-cta:hover {
+  background: var(--accent-cyan-deep) !important;
+  box-shadow: 0 4px 16px rgba(8,145,178,0.3) !important;
+}
+
+/* HERO */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  padding: 120px 20px 80px; z-index: 1; overflow: hidden;
+}
+
+.hero-gradient {
+  position: absolute; width: 700px; height: 700px;
+  border-radius: 50%; filter: blur(180px); opacity: 0.1; z-index: 0;
+}
+.hero-gradient-1 { top: -10%; left: 10%; background: var(--accent-cyan); }
+.hero-gradient-2 { bottom: -10%; right: 10%; background: var(--accent-magenta); }
+
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
+
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem; color: var(--accent-green);
+  letter-spacing: 3px; text-transform: uppercase; margin-bottom: 24px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+}
+.hero-tag::before { content: '> '; opacity: 0.5; }
+
+.hero-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 900;
+  line-height: 1.05; letter-spacing: -1px; margin-bottom: 8px;
+  color: var(--text-black);
+  opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+}
+.hero-title .cyber { color: var(--accent-cyan); }
+.hero-title .gipsy { color: var(--accent-magenta); }
+
+.hero-subtitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 500;
+  color: var(--text-muted); letter-spacing: 6px; text-transform: uppercase;
+  margin-bottom: 32px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
+}
+
+.hero-desc {
+  font-size: 1.15rem; color: var(--text-body);
+  max-width: 600px; margin: 0 auto 48px; line-height: 1.8;
+  opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards;
+}
+
+.hero-buttons {
+  display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s ease 1.1s forwards;
+}
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 40px;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-cyan-deep));
+  color: #ffffff;
+  font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+  border: none; cursor: pointer; border-radius: 6px; transition: all 0.3s;
+}
+.btn-primary:hover {
+  box-shadow: 0 8px 30px rgba(8,145,178,0.35);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 40px; background: transparent;
+  color: var(--text-dark);
+  font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+  border: 2px solid var(--border-medium); border-radius: 6px;
+  cursor: pointer; transition: all 0.3s;
+}
+.btn-secondary:hover { border-color: var(--accent-magenta); color: var(--accent-magenta); }
+
+/* STATS */
+.stats-bar {
+  position: relative; z-index: 1;
+  display: flex; justify-content: center; gap: 60px;
+  padding: 44px 20px; flex-wrap: wrap;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-light);
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 800;
+  color: var(--accent-cyan);
+}
+.stat-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+  color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px;
+}
+
+/* SECTIONS */
+section { position: relative; z-index: 1; padding: 100px 20px; }
+.section-header { text-align: center; margin-bottom: 64px; }
+.section-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+  color: var(--accent-green); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+  letter-spacing: 1px; color: var(--text-black);
+}
+.section-title span { color: var(--accent-cyan); }
+
+/* FEATURES */
+.features-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px; max-width: 1100px; margin: 0 auto;
+}
+.feature-card {
+  background: var(--bg-card); border: 1px solid var(--border-light);
+  padding: 40px 32px; border-radius: 12px; position: relative;
+  overflow: hidden; transition: all 0.4s; box-shadow: var(--shadow-sm);
+}
+.feature-card::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+  opacity: 0; transition: opacity 0.4s; border-radius: 12px 12px 0 0;
+}
+.feature-card:hover { border-color: var(--border-medium); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.feature-card:hover::before { opacity: 1; }
+.feature-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; }
+.feature-title {
+  font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700;
+  margin-bottom: 12px; letter-spacing: 1px; color: var(--text-black);
+}
+.feature-desc { font-size: 0.95rem; color: var(--text-body); line-height: 1.7; }
+
+/* HOW */
+.how-section { background: var(--bg-light); }
+.steps-container { max-width: 800px; margin: 0 auto; position: relative; }
+.steps-container::before {
+  content: ''; position: absolute; left: 24px; top: 0; bottom: 0;
+  width: 3px; border-radius: 3px;
+  background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-magenta), var(--accent-green));
+  opacity: 0.25;
+}
+.step { display: flex; gap: 32px; align-items: flex-start; margin-bottom: 48px; position: relative; }
+.step-num {
+  width: 50px; height: 50px; min-width: 50px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 1rem;
+  color: #fff; background: var(--accent-cyan); border-radius: 12px; z-index: 1;
+  box-shadow: 0 4px 12px rgba(8,145,178,0.25);
+}
+.step:nth-child(2) .step-num { background: var(--accent-magenta); box-shadow: 0 4px 12px rgba(162,28,175,0.25); }
+.step:nth-child(3) .step-num { background: var(--accent-green); box-shadow: 0 4px 12px rgba(22,163,74,0.25); }
+.step:nth-child(4) .step-num { background: var(--accent-amber); box-shadow: 0 4px 12px rgba(217,119,6,0.25); }
+.step-content h3 {
+  font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 700;
+  margin-bottom: 8px; letter-spacing: 1px; color: var(--text-black);
+}
+.step-content p { color: var(--text-body); font-size: 0.95rem; line-height: 1.7; }
+
+/* AUDIENCE */
+.audience-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px; max-width: 1000px; margin: 0 auto;
+}
+.audience-card {
+  background: var(--bg-card); border: 1px solid var(--border-light);
+  padding: 36px 28px; text-align: center; border-radius: 12px;
+  transition: all 0.4s; box-shadow: var(--shadow-sm);
+}
+.audience-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.audience-emoji { font-size: 3rem; margin-bottom: 16px; display: block; }
+.audience-title {
+  font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 700;
+  margin-bottom: 10px; letter-spacing: 1px; color: var(--text-black);
+}
+.audience-desc { font-size: 0.9rem; color: var(--text-body); line-height: 1.6; }
+
+/* TERMINAL (dark island) */
+.terminal-section {
+  max-width: 700px; margin: 0 auto;
+  background: var(--bg-dark-section); border: 1px solid #1e293b;
+  border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-lg);
+}
+.terminal-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 16px; background: rgba(0,0,0,0.3); border-bottom: 1px solid #1e293b;
+}
+.terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+.terminal-dot:nth-child(1) { background: #ff5f56; }
+.terminal-dot:nth-child(2) { background: #ffbd2e; }
+.terminal-dot:nth-child(3) { background: #27c93f; }
+.terminal-title {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+  color: #64748b; margin-left: 12px;
+}
+.terminal-body {
+  padding: 24px; font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem; line-height: 2; color: #e2e8f0;
+}
+.terminal-body .prompt { color: #4ade80; }
+.terminal-body .cmd { color: #e2e8f0; }
+.terminal-body .output { color: #22d3ee; }
+.terminal-body .comment { color: #64748b; }
+
+/* LOCATION */
+.location-section {
+  background: var(--bg-card); border: 1px solid var(--border-light);
+  max-width: 800px; margin: 0 auto; padding: 48px;
+  text-align: center; border-radius: 16px; box-shadow: var(--shadow-md);
+}
+.location-flag { font-size: 2.5rem; margin-bottom: 16px; display: block; }
+.location-city {
+  font-family: 'Orbitron', sans-serif; font-size: 1.6rem;
+  font-weight: 700; margin-bottom: 8px; color: var(--text-black);
+}
+.location-info {
+  color: var(--text-body); font-size: 0.95rem; line-height: 1.8;
+  max-width: 500px; margin: 0 auto;
+}
+
+/* CTA */
+.cta-section { text-align: center; padding: 120px 20px; position: relative; background: var(--bg-light); }
+.cta-section::before {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%); width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(8,145,178,0.06), transparent 70%);
+  border-radius: 50%;
+}
+.cta-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800;
+  margin-bottom: 20px; position: relative; color: var(--text-black);
+}
+.cta-title .hl { color: var(--accent-cyan); }
+.cta-desc {
+  font-size: 1.1rem; color: var(--text-body);
+  max-width: 500px; margin: 0 auto 40px; position: relative;
+}
+.cta-free {
+  display: inline-block; font-family: 'Orbitron', sans-serif;
+  font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--accent-green); border: 2px solid var(--accent-green);
+  padding: 8px 24px; margin-bottom: 32px; position: relative;
+  border-radius: 4px; font-weight: 700;
+}
+
+/* FOOTER */
+footer {
+  position: relative; z-index: 1; background: var(--bg-dark-section);
+  padding: 48px 20px; text-align: center;
+}
+.footer-logo {
+  font-family: 'Orbitron', sans-serif; font-weight: 800;
+  font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 8px;
+}
+.footer-logo .cy { color: #22d3ee; }
+.footer-logo .gi { color: #d946ef; }
+.footer-city {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+  color: #64748b; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 24px;
+}
+.footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 24px; }
+.footer-links a { color: #94a3b8; text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+.footer-links a:hover { color: #22d3ee; }
+.footer-copy { font-size: 0.75rem; color: #475569; }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+.cursor-blink {
+  display: inline-block; width: 8px; height: 16px;
+  background: #4ade80; margin-left: 4px; vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  nav { padding: 12px 20px; }
+  .nav-links { display: none; }
+  .stats-bar { gap: 32px; }
+  .stat-num { font-size: 1.8rem; }
+  section { padding: 60px 16px; }
+  .feature-card { padding: 28px 20px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .location-section { padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<nav>
+  <div class="nav-logo"><span class="cy">Cyber</span><span class="gi">Gipsy</span></div>
+  <div class="nav-links">
+    <a href="#about">О клубе</a>
+    <a href="#how">Как это работает</a>
+    <a href="#who">Для кого</a>
+    <a href="#join" class="nav-cta">Вступить</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-gradient hero-gradient-1"></div>
+  <div class="hero-gradient hero-gradient-2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Владивосток • Киберспортивные клубы</div>
+    <h1 class="hero-title">
+      <span class="cyber">Cyber</span><span class="gipsy">Gipsy</span>
+    </h1>
+    <p class="hero-subtitle">Программируй в&nbsp;киберклубе</p>
+    <p class="hero-desc">
+      Мощные&nbsp;ПК. Весь&nbsp;софт. Живое комьюнити.<br>
+      Приходи в&nbsp;любой киберклуб-партнёр, садись за&nbsp;машину и&nbsp;создавай.
+      Бесплатно.
+    </p>
+    <div class="hero-buttons">
+      <a href="#join" class="btn-primary">⚡ Записаться</a>
+      <a href="#about" class="btn-secondary">Узнать больше ↓</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">0₽</div><div class="stat-label">Стоимость</div></div>
+  <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Софт включён</div></div>
+  <div class="stat-item"><div class="stat-num">RTX</div><div class="stat-label">Мощные ПК</div></div>
+  <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">Комьюнити</div></div>
+</div>
+
+<section id="about">
+  <div class="section-header reveal">
+    <div class="section-tag">// что мы даём</div>
+    <h2 class="section-title">Всё для <span>продуктивного кодинга</span></h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <span class="feature-icon">🖥️</span>
+      <h3 class="feature-title">Мощный ПК</h3>
+      <p class="feature-desc">Игровые машины с топовым железом. Ничего не тормозит — ни IDE, ни Docker, ни браузер с 40&nbsp;вкладками.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🛠️</span>
+      <h3 class="feature-title">Весь софт</h3>
+      <p class="feature-desc">VS Code, JetBrains, Figma, Git, Node.js, Python, Docker — всё установлено и настроено. Пришёл и работаешь.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🌐</span>
+      <h3 class="feature-title">Быстрый интернет</h3>
+      <p class="feature-desc">Гигабитный канал киберклуба. npm install за секунды, деплой без ожидания, созвоны без лагов.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🤝</span>
+      <h3 class="feature-title">Живое комьюнити</h3>
+      <p class="feature-desc">Рядом — такие же увлечённые люди. Вопросы, ревью, парное программирование, нетворкинг.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🤖</span>
+      <h3 class="feature-title">AI-инструменты</h3>
+      <p class="feature-desc">Доступ к Claude, ChatGPT, Copilot и другим AI-помощникам. Пиши код быстрее с нейросетями.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🎯</span>
+      <h3 class="feature-title">Менторство</h3>
+      <p class="feature-desc">Опытные разработчики помогают разобраться. Не застрянешь на баге в одиночку.</p>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="how-section">
+  <div class="section-header reveal">
+    <div class="section-tag">// как это работает</div>
+    <h2 class="section-title">Четыре шага до <span>первого коммита</span></h2>
+  </div>
+  <div class="steps-container">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Запишись в Telegram</h3>
+        <p>Вступи в наш чат, представься и узнай расписание ближайших встреч. Никаких анкет и собеседований.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Приходи в киберклуб</h3>
+        <p>Выбери удобный клуб-партнёр во Владивостоке. Мы бронируем места — тебе нужен только ты сам.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Садись и кодь</h3>
+        <p>Всё уже настроено. Открывай IDE, клонируй репо, запускай проект. Работай над своим или присоединяйся к командному.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h3>Расти в комьюнити</h3>
+        <p>Делись прогрессом, получай фидбек, находи соратников для своих идей. Вместе — быстрее.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="section-header reveal">
+    <div class="section-tag">// для кого</div>
+    <h2 class="section-title">Любой уровень — <span>welcome</span></h2>
+  </div>
+  <div class="audience-grid">
+    <div class="audience-card reveal">
+      <span class="audience-emoji">🌱</span>
+      <h3 class="audience-title">Новичок</h3>
+      <p class="audience-desc">Хочешь попробовать — мы покажем с чего начать. Python, HTML, первый сайт за вечер.</p>
+    </div>
+    <div class="audience-card reveal">
+      <span class="audience-emoji">💻</span>
+      <h3 class="audience-title">Учащийся</h3>
+      <p class="audience-desc">Проходишь курсы? Кодь в компании, а не в одиночку дома. Мотивация ×10.</p>
+    </div>
+    <div class="audience-card reveal">
+      <span class="audience-emoji">⚡</span>
+      <h3 class="audience-title">Джун / Мидл</h3>
+      <p class="audience-desc">Пет-проекты, опен-сорс, подготовка к собесам. Среда для роста.</p>
+    </div>
+    <div class="audience-card reveal">
+      <span class="audience-emoji">🚀</span>
+      <h3 class="audience-title">Предприниматель</h3>
+      <p class="audience-desc">Собираешь MVP? Найди разработчика-партнёра прямо за соседним столом.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="terminal-section reveal">
+    <div class="terminal-bar">
+      <div class="terminal-dot"></div>
+      <div class="terminal-dot"></div>
+      <div class="terminal-dot"></div>
+      <span class="terminal-title">cybergipsy@vladivostok:~</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="prompt">$</span> <span class="cmd">cd /cybergipsy</span></div>
+      <div><span class="prompt">$</span> <span class="cmd">cat mission.txt</span></div>
+      <div><span class="output">Сделать программирование доступным.</span></div>
+      <div><span class="output">Убрать барьеры: дорогой ноутбук, одиночество, страх начать.</span></div>
+      <div><span class="output">Дать каждому мощный ПК, софт и комьюнити — бесплатно.</span></div>
+      <div><span class="comment"># Владивосток — это только начало.</span></div>
+      <div><span class="prompt">$</span> <span class="cmd">./join.sh</span><span class="cursor-blink"></span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="location-section reveal">
+    <span class="location-flag">🏔️</span>
+    <div class="location-city">Владивосток</div>
+    <p class="location-info">
+      Встречи проходят в киберспортивных клубах города. Выбери ближайший к себе — мы публикуем расписание и адреса в Telegram-канале. Скоро — новые города.
+    </p>
+  </div>
+</section>
+
+<section id="join" class="cta-section">
+  <div class="reveal">
+    <div class="cta-free">Бесплатно • Free</div>
+    <h2 class="cta-title">Готов <span class="hl">кодить</span>?</h2>
+    <p class="cta-desc">Вступай в Telegram-чат CyberGipsy, узнай расписание и приходи на ближайшую встречу.</p>
+    <a href="#" class="btn-primary" style="font-size: 1rem; padding: 20px 48px;">🚀 Вступить в Telegram</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><span class="cy">Cyber</span><span class="gi">Gipsy</span></div>
+  <div class="footer-city">Владивосток, Россия</div>
+  <div class="footer-links">
+    <a href="#">Telegram</a>
+    <a href="#">Instagram</a>
+    <a href="#">GitHub</a>
+    <a href="#">VK</a>
+  </div>
+  <div class="footer-copy">© 2026 CyberGipsy. Кодь свободно.</div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 100);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+reveals.forEach(el => observer.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
