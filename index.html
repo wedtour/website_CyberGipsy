@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CyberGipsy — Программируй в киберклубе | Владивосток</title>
-<meta name="description" content="CyberGipsy — бесплатный клуб программирования в киберспортивных клубах Владивостока. Мощные ПК, софт, комьюнити. Приходи и кодь.">
+<title>CyberGipsy — Программируй в киберклубе | Владивосток • Москва</title>
+<meta name="description" content="CyberGipsy — бесплатное обучение, AI консультации и комьюнити разработчиков во Владивостоке и Москве.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -15,6 +15,7 @@
   --accent-magenta-deep: #86198f;
   --accent-green: #16a34a;
   --accent-amber: #d97706;
+  --accent-purple: #7c3aed;
   --bg-white: #fafbfc;
   --bg-light: #f1f3f5;
   --bg-card: #ffffff;
@@ -132,6 +133,19 @@ nav {
   opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
 }
 
+.cities-badge {
+  display: inline-flex; gap: 16px; justify-content: center;
+  margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
+}
+.city-badge {
+  background: var(--bg-light); padding: 8px 20px; border-radius: 20px;
+  font-size: 0.85rem; font-weight: 600; color: var(--text-dark);
+  border: 1px solid var(--border-light);
+}
+.city-badge.active {
+  background: var(--accent-cyan); color: white; border-color: var(--accent-cyan);
+}
+
 .hero-desc {
   font-size: 1.15rem; color: var(--text-body);
   max-width: 600px; margin: 0 auto 48px; line-height: 1.8;
@@ -201,76 +215,119 @@ section { position: relative; z-index: 1; padding: 100px 20px; }
 }
 .section-title span { color: var(--accent-cyan); }
 
-/* FEATURES */
-.features-grid {
+/* SERVICES GRID */
+.services-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px; max-width: 1100px; margin: 0 auto;
+  gap: 24px; max-width: 1200px; margin: 0 auto;
 }
-.feature-card {
-  background: var(--bg-card); border: 1px solid var(--border-light);
+
+.service-card {
+  background: var(--bg-card); border: 2px solid var(--border-light);
   padding: 40px 32px; border-radius: 12px; position: relative;
   overflow: hidden; transition: all 0.4s; box-shadow: var(--shadow-sm);
 }
-.feature-card::before {
+.service-card::before {
   content: ''; position: absolute; top: 0; left: 0;
   width: 100%; height: 4px;
   background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
   opacity: 0; transition: opacity 0.4s; border-radius: 12px 12px 0 0;
 }
-.feature-card:hover { border-color: var(--border-medium); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-.feature-card:hover::before { opacity: 1; }
-.feature-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; }
-.feature-title {
-  font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700;
+.service-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.service-card:hover::before { opacity: 1; }
+
+.service-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; }
+.service-title {
+  font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700;
   margin-bottom: 12px; letter-spacing: 1px; color: var(--text-black);
 }
-.feature-desc { font-size: 0.95rem; color: var(--text-body); line-height: 1.7; }
+.service-price {
+  color: var(--accent-green); font-weight: 700; margin-bottom: 12px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;
+}
+.service-desc { font-size: 0.95rem; color: var(--text-body); line-height: 1.7; margin-bottom: 16px; }
+.service-features {
+  font-size: 0.85rem; color: var(--text-muted); line-height: 1.8;
+  padding-top: 16px; border-top: 1px solid var(--border-light);
+}
+.service-features li { margin: 4px 0; }
 
-/* HOW */
-.how-section { background: var(--bg-light); }
-.steps-container { max-width: 800px; margin: 0 auto; position: relative; }
-.steps-container::before {
-  content: ''; position: absolute; left: 24px; top: 0; bottom: 0;
-  width: 3px; border-radius: 3px;
-  background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-magenta), var(--accent-green));
-  opacity: 0.25;
+/* PRICING */
+.pricing-section {
+  background: var(--bg-light);
 }
-.step { display: flex; gap: 32px; align-items: flex-start; margin-bottom: 48px; position: relative; }
-.step-num {
-  width: 50px; height: 50px; min-width: 50px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 1rem;
-  color: #fff; background: var(--accent-cyan); border-radius: 12px; z-index: 1;
-  box-shadow: 0 4px 12px rgba(8,145,178,0.25);
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px; max-width: 1100px; margin: 0 auto;
 }
-.step:nth-child(2) .step-num { background: var(--accent-magenta); box-shadow: 0 4px 12px rgba(162,28,175,0.25); }
-.step:nth-child(3) .step-num { background: var(--accent-green); box-shadow: 0 4px 12px rgba(22,163,74,0.25); }
-.step:nth-child(4) .step-num { background: var(--accent-amber); box-shadow: 0 4px 12px rgba(217,119,6,0.25); }
-.step-content h3 {
-  font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 700;
-  margin-bottom: 8px; letter-spacing: 1px; color: var(--text-black);
-}
-.step-content p { color: var(--text-body); font-size: 0.95rem; line-height: 1.7; }
-
-/* AUDIENCE */
-.audience-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px; max-width: 1000px; margin: 0 auto;
-}
-.audience-card {
+.pricing-card {
   background: var(--bg-card); border: 1px solid var(--border-light);
-  padding: 36px 28px; text-align: center; border-radius: 12px;
+  padding: 36px 28px; border-radius: 12px; text-align: center;
+  transition: all 0.4s; box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.pricing-card.featured {
+  border: 2px solid var(--accent-cyan); transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(8,145,178,0.15);
+}
+.pricing-card:hover { box-shadow: var(--shadow-lg); }
+.pricing-badge {
+  display: inline-block; background: var(--accent-cyan);
+  color: white; padding: 6px 16px; border-radius: 20px;
+  font-size: 0.75rem; font-weight: 700; margin-bottom: 16px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.pricing-title {
+  font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700;
+  margin-bottom: 12px; color: var(--text-black);
+}
+.pricing-amount {
+  font-size: 2.2rem; font-weight: 800; color: var(--accent-cyan);
+  margin: 12px 0; font-family: 'Orbitron', sans-serif;
+}
+.pricing-desc {
+  font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px;
+}
+.pricing-features {
+  list-style: none; text-align: left; margin-bottom: 24px;
+  border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);
+  padding: 16px 0;
+}
+.pricing-features li {
+  padding: 8px 0; font-size: 0.9rem; color: var(--text-body);
+}
+.pricing-features li::before {
+  content: '✓ '; color: var(--accent-green); font-weight: 700; margin-right: 8px;
+}
+
+/* CITIES */
+.cities-section {
+  background: var(--bg-light);
+}
+.cities-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px; max-width: 1000px; margin: 0 auto;
+}
+.city-card {
+  background: var(--bg-card); border: 1px solid var(--border-light);
+  padding: 40px 32px; border-radius: 12px; text-align: center;
   transition: all 0.4s; box-shadow: var(--shadow-sm);
 }
-.audience-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px); box-shadow: var(--shadow-md); }
-.audience-emoji { font-size: 3rem; margin-bottom: 16px; display: block; }
-.audience-title {
-  font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 700;
-  margin-bottom: 10px; letter-spacing: 1px; color: var(--text-black);
+.city-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.city-emoji { font-size: 3rem; margin-bottom: 16px; display: block; }
+.city-name {
+  font-family: 'Orbitron', sans-serif; font-size: 1.6rem;
+  font-weight: 700; margin-bottom: 16px; color: var(--text-black);
 }
-.audience-desc { font-size: 0.9rem; color: var(--text-body); line-height: 1.6; }
+.city-info {
+  color: var(--text-body); font-size: 0.95rem; line-height: 1.8;
+  margin-bottom: 20px;
+}
+.city-schedule {
+  background: var(--bg-light); padding: 16px; border-radius: 8px;
+  font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;
+}
 
-/* TERMINAL (dark island) */
+/* TERMINAL */
 .terminal-section {
   max-width: 700px; margin: 0 auto;
   background: var(--bg-dark-section); border: 1px solid #1e293b;
@@ -297,47 +354,53 @@ section { position: relative; z-index: 1; padding: 100px 20px; }
 .terminal-body .output { color: #22d3ee; }
 .terminal-body .comment { color: #64748b; }
 
-/* LOCATION */
-.location-section {
-  background: var(--bg-card); border: 1px solid var(--border-light);
-  max-width: 800px; margin: 0 auto; padding: 48px;
-  text-align: center; border-radius: 16px; box-shadow: var(--shadow-md);
+/* MODAL */
+.modal-overlay {
+  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center;
+  animation: fadeIn 0.3s ease;
 }
-.location-flag { font-size: 2.5rem; margin-bottom: 16px; display: block; }
-.location-city {
-  font-family: 'Orbitron', sans-serif; font-size: 1.6rem;
-  font-weight: 700; margin-bottom: 8px; color: var(--text-black);
-}
-.location-info {
-  color: var(--text-body); font-size: 0.95rem; line-height: 1.8;
-  max-width: 500px; margin: 0 auto;
+.modal-overlay.active { display: flex; }
+
+.modal-content {
+  background: white; border-radius: 16px; padding: 40px;
+  max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.4s ease;
+  position: relative;
 }
 
-/* CTA */
-.cta-section { text-align: center; padding: 120px 20px; position: relative; background: var(--bg-light); }
-.cta-section::before {
-  content: ''; position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%); width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(8,145,178,0.06), transparent 70%);
-  border-radius: 50%;
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  background: none; border: none; font-size: 1.5rem;
+  cursor: pointer; color: var(--text-muted);
+  transition: color 0.3s;
 }
-.cta-title {
+.modal-close:hover { color: var(--accent-magenta); }
+
+.modal-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800;
-  margin-bottom: 20px; position: relative; color: var(--text-black);
+  font-size: 1.6rem; font-weight: 700;
+  margin-bottom: 8px; color: var(--text-black);
 }
-.cta-title .hl { color: var(--accent-cyan); }
-.cta-desc {
-  font-size: 1.1rem; color: var(--text-body);
-  max-width: 500px; margin: 0 auto 40px; position: relative;
+
+.modal-buttons {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px;
 }
-.cta-free {
-  display: inline-block; font-family: 'Orbitron', sans-serif;
-  font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase;
-  color: var(--accent-green); border: 2px solid var(--accent-green);
-  padding: 8px 24px; margin-bottom: 32px; position: relative;
-  border-radius: 4px; font-weight: 700;
+.btn-modal {
+  padding: 14px 20px; border: none; border-radius: 8px;
+  font-family: 'Orbitron', sans-serif; font-weight: 600;
+  cursor: pointer; transition: all 0.3s; font-size: 0.85rem;
+  text-transform: uppercase;
 }
+.btn-telegram {
+  background: #0088cc; color: white;
+}
+.btn-telegram:hover { background: #0077b3; }
+.btn-form {
+  background: var(--accent-cyan); color: white;
+}
+.btn-form:hover { background: var(--accent-cyan-deep); }
 
 /* FOOTER */
 footer {
@@ -350,9 +413,9 @@ footer {
 }
 .footer-logo .cy { color: #22d3ee; }
 .footer-logo .gi { color: #d946ef; }
-.footer-city {
+.footer-cities {
   font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
-  color: #64748b; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 24px;
+  color: #64748b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px;
 }
 .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 24px; }
 .footer-links a { color: #94a3b8; text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
@@ -361,6 +424,14 @@ footer {
 
 /* ANIMATIONS */
 @keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
@@ -383,9 +454,11 @@ footer {
   .stats-bar { gap: 32px; }
   .stat-num { font-size: 1.8rem; }
   section { padding: 60px 16px; }
-  .feature-card { padding: 28px 20px; }
-  .features-grid { grid-template-columns: 1fr; }
-  .location-section { padding: 32px 20px; }
+  .service-card { padding: 28px 20px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .pricing-card.featured { transform: scale(1); }
+  .modal-buttons { grid-template-columns: 1fr; }
+  .cities-badge { flex-direction: column; }
 }
 </style>
 </head>
@@ -396,10 +469,12 @@ footer {
 <nav>
   <div class="nav-logo"><span class="cy">Cyber</span><span class="gi">Gipsy</span></div>
   <div class="nav-links">
-    <a href="#about">О клубе</a>
-    <a href="#how">Как это работает</a>
-    <a href="#who">Для кого</a>
-    <a href="#join" class="nav-cta">Вступить</a>
+    <a href="#services">Услуги</a>
+    <a href="cybergipsy_model.html">Модель</a>
+    <a href="buy-business.html">Купить бизнес</a>
+    <a href="create-business.html">Создать бизнес</a>
+    <a href="#cities">Города</a>
+    <a href="#contact" class="nav-cta">Консультация</a>
   </div>
 </nav>
 
@@ -407,187 +482,421 @@ footer {
   <div class="hero-gradient hero-gradient-1"></div>
   <div class="hero-gradient hero-gradient-2"></div>
   <div class="hero-content">
-    <div class="hero-tag">Владивосток • Киберспортивные клубы</div>
+    <div class="cities-badge">
+      <div class="city-badge active">🏔️ Владивосток</div>
+      <div class="city-badge active">🏙️ Москва</div>
+    </div>
     <h1 class="hero-title">
       <span class="cyber">Cyber</span><span class="gipsy">Gipsy</span>
     </h1>
-    <p class="hero-subtitle">Программируй в&nbsp;киберклубе</p>
+    <p class="hero-subtitle">Программируй • Учись • Расти</p>
     <p class="hero-desc">
-      Мощные&nbsp;ПК. Весь&nbsp;софт. Живое комьюнити.<br>
-      Приходи в&nbsp;любой киберклуб-партнёр, садись за&nbsp;машину и&nbsp;создавай.
-      Бесплатно.
+      Бесплатное обучение программированию, AI консультации для бизнеса, и живое комьюнити разработчиков. Приходи в киберклуб, кодь с друзьями, найди партнёров.
     </p>
     <div class="hero-buttons">
-      <a href="#join" class="btn-primary">⚡ Записаться</a>
-      <a href="#about" class="btn-secondary">Узнать больше ↓</a>
+      <a onclick="openBotModal()" class="btn-primary">💬 Спросить у бота</a>
+      <a href="#services" class="btn-secondary">Узнать услуги ↓</a>
     </div>
   </div>
 </section>
 
 <div class="stats-bar">
-  <div class="stat-item"><div class="stat-num">0₽</div><div class="stat-label">Стоимость</div></div>
+  <div class="stat-item"><div class="stat-num">0₽</div><div class="stat-label">Обучение & Комьюнити</div></div>
+  <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Города</div></div>
   <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Софт включён</div></div>
   <div class="stat-item"><div class="stat-num">RTX</div><div class="stat-label">Мощные ПК</div></div>
-  <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">Комьюнити</div></div>
 </div>
 
-<section id="about">
+<!-- SERVICES SECTION -->
+<section id="services">
   <div class="section-header reveal">
-    <div class="section-tag">// что мы даём</div>
-    <h2 class="section-title">Всё для <span>продуктивного кодинга</span></h2>
+    <div class="section-tag">// услуги cybergipsy</div>
+    <h2 class="section-title">Выбери свой <span>путь развития</span></h2>
   </div>
-  <div class="features-grid">
-    <div class="feature-card reveal">
-      <span class="feature-icon">🖥️</span>
-      <h3 class="feature-title">Мощный ПК</h3>
-      <p class="feature-desc">Игровые машины с топовым железом. Ничего не тормозит — ни IDE, ни Docker, ни браузер с 40&nbsp;вкладками.</p>
+  
+  <div class="services-grid">
+    <!-- СВОБОДНОЕ ОБУЧЕНИЕ -->
+    <div class="service-card reveal">
+      <span class="service-icon">📚</span>
+      <h3 class="service-title">Свободное обучение</h3>
+      <div class="service-price">БЕСПЛАТНО</div>
+      <p class="service-desc">Приходи в киберклуб, кодь в компании опытных разработчиков. Менторство включено.</p>
+      <ul class="service-features">
+        <li>✓ Python, JavaScript, React</li>
+        <li>✓ Менторство опытных разработчиков</li>
+        <li>✓ Мощные ПК и гигабитный интернет</li>
+        <li>✓ Живое комьюнити разработчиков</li>
+        <li>✓ Гибкое расписание</li>
+      </ul>
     </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">🛠️</span>
-      <h3 class="feature-title">Весь софт</h3>
-      <p class="feature-desc">VS Code, JetBrains, Figma, Git, Node.js, Python, Docker — всё установлено и настроено. Пришёл и работаешь.</p>
+
+    <!-- СТРУКТУРИРОВАННЫЕ КУРСЫ -->
+    <div class="service-card reveal">
+      <span class="service-icon">🎓</span>
+      <h3 class="service-title">Структурированные курсы</h3>
+      <div class="service-price">5 000 - 40 000 ₽</div>
+      <p class="service-desc">Интенсивные курсы с четким путём обучения и сертификатом.</p>
+      <ul class="service-features">
+        <li>✓ 4-12 недельные программы</li>
+        <li>✓ Живые лекции + практика</li>
+        <li>✓ Проектный портфель</li>
+        <li>✓ Сертификат</li>
+        <li>✓ Трудоустройство assistance</li>
+      </ul>
     </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">🌐</span>
-      <h3 class="feature-title">Быстрый интернет</h3>
-      <p class="feature-desc">Гигабитный канал киберклуба. npm install за секунды, деплой без ожидания, созвоны без лагов.</p>
+
+    <!-- AI КОНСУЛЬТАЦИЯ -->
+    <div class="service-card reveal">
+      <span class="service-icon">💼</span>
+      <h3 class="service-title">AI Консультация (Бизнес)</h3>
+      <div class="service-price">5 000 - 25 000 ₽</div>
+      <p class="service-desc">1-на-1 консультация с AI специалистом по развитию вашего бизнеса.</p>
+      <ul class="service-features">
+        <li>✓ Валидация идеи</li>
+        <li>✓ Go-to-market стратегия</li>
+        <li>✓ Финансовое планирование</li>
+        <li>✓ Маркетинг & Growth</li>
+        <li>✓ Investor pitch подготовка</li>
+      </ul>
     </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">🤝</span>
-      <h3 class="feature-title">Живое комьюнити</h3>
-      <p class="feature-desc">Рядом — такие же увлечённые люди. Вопросы, ревью, парное программирование, нетворкинг.</p>
+
+    <!-- AI ДЛЯ СТАРТАПА -->
+    <div class="service-card reveal">
+      <span class="service-icon">🚀</span>
+      <h3 class="service-title">AI для стартапа (Пакет)</h3>
+      <div class="service-price">40 000 - 250 000 ₽</div>
+      <p class="service-desc">Полный цикл: от идеи до MVP и запуска. Персональный AI advisor.</p>
+      <ul class="service-features">
+        <li>✓ Валидация и стратегия</li>
+        <li>✓ Техническая архитектура</li>
+        <li>✓ Weekly консультации</li>
+        <li>✓ Recruitment помощь</li>
+        <li>✓ Investor relations</li>
+      </ul>
     </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">🤖</span>
-      <h3 class="feature-title">AI-инструменты</h3>
-      <p class="feature-desc">Доступ к Claude, ChatGPT, Copilot и другим AI-помощникам. Пиши код быстрее с нейросетями.</p>
+
+    <!-- МЕНТОРСТВО -->
+    <div class="service-card reveal">
+      <span class="service-icon">👨‍💼</span>
+      <h3 class="service-title">Персональное менторство</h3>
+      <div class="service-price">3 500 ₽/час</div>
+      <p class="service-desc">1-на-1 сессии с опытным разработчиком для ускоренного прогресса.</p>
+      <ul class="service-features">
+        <li>✓ Code review</li>
+        <li>✓ Архитектура проектов</li>
+        <li>✓ Career guidance</li>
+        <li>✓ Technical interview prep</li>
+        <li>✓ Гибкое расписание</li>
+      </ul>
     </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">🎯</span>
-      <h3 class="feature-title">Менторство</h3>
-      <p class="feature-desc">Опытные разработчики помогают разобраться. Не застрянешь на баге в одиночку.</p>
+
+    <!-- КОМАНДНЫЕ СЕССИИ -->
+    <div class="service-card reveal">
+      <span class="service-icon">👥</span>
+      <h3 class="service-title">Командные проекты</h3>
+      <div class="service-price">БЕСПЛАТНО</div>
+      <p class="service-desc">Работай с командой над реальными проектами и open-source.</p>
+      <ul class="service-features">
+        <li>✓ Team programming</li>
+        <li>✓ Open source contributions</li>
+        <li>✓ Hackathons</li>
+        <li>✓ Code reviews</li>
+        <li>✓ Portfolio projects</li>
+      </ul>
+    </div>
+
+    <!-- КУПИТЬ ГОТОВЫЙ AI БИЗНЕС -->
+    <div class="service-card reveal">
+      <span class="service-icon">🛍️</span>
+      <h3 class="service-title">Купить готовый AI бизнес</h3>
+      <div class="service-price">700 000 - 3 000 000 ₽</div>
+      <p class="service-desc">Готовый микробизнес с доказанным трафиком и стабильным доходом. Включает всё: сайт, контент, автоматизацию. Начни зарабатывать сразу.</p>
+      <ul class="service-features">
+        <li>✓ Готовый сайт с органическим трафиком</li>
+        <li>✓ 100+ SEO-оптимизированных статей</li>
+        <li>✓ Доказанный стабильный доход</li>
+        <li>✓ Полная автоматизация процессов</li>
+        <li>✓ Передача всех доступов и знаний</li>
+        <li>✓ Поддержка 60 дней</li>
+      </ul>
+    </div>
+
+    <!-- СОЗДАТЬ СВОЙ AI БИЗНЕС -->
+    <div class="service-card reveal">
+      <span class="service-icon">🏗️</span>
+      <h3 class="service-title">Создать свой AI бизнес с нами</h3>
+      <div class="service-price">199 990 - 499 990 ₽</div>
+      <p class="service-desc">Full-cycle услуга: от выбора ниши до первого дохода. Мы создаём твой микробизнес. Ты только учишься и зарабатываешь.</p>
+      <ul class="service-features">
+        <li>✓ Выбор ниши с гарантией</li>
+        <li>✓ Разработка сайта</li>
+        <li>✓ Генерация 100+ статей</li>
+        <li>✓ SEO оптимизация</li>
+        <li>✓ Настройка автоматизации</li>
+        <li>✓ Тренинг и поддержка (3 мес)</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<section id="how" class="how-section">
+<!-- PRICING SECTION -->
+<section id="pricing" class="pricing-section">
   <div class="section-header reveal">
-    <div class="section-tag">// как это работает</div>
-    <h2 class="section-title">Четыре шага до <span>первого коммита</span></h2>
+    <div class="section-tag">// пакеты ai консалтинга</div>
+    <h2 class="section-title">Выбери пакет для <span>твоего стартапа</span></h2>
   </div>
-  <div class="steps-container">
-    <div class="step reveal">
-      <div class="step-num">01</div>
-      <div class="step-content">
-        <h3>Запишись в Telegram</h3>
-        <p>Вступи в наш чат, представься и узнай расписание ближайших встреч. Никаких анкет и собеседований.</p>
-      </div>
+  
+  <div class="pricing-grid">
+    <!-- ИДЕЯ → MVP -->
+    <div class="pricing-card reveal">
+      <div class="pricing-badge">Для новичков</div>
+      <h3 class="pricing-title">Идея → MVP</h3>
+      <div class="pricing-amount">39 990 ₽</div>
+      <p class="pricing-desc">1 месяц интенсива</p>
+      <ul class="pricing-features">
+        <li>Валидация бизнес-идеи</li>
+        <li>Анализ конкурентов</li>
+        <li>Техническая архитектура</li>
+        <li>Финансовая модель</li>
+        <li>Roadmap разработки</li>
+        <li>3 консультации</li>
+      </ul>
+      <button class="btn-modal btn-telegram" onclick="window.open('https://t.me/cybergipsybot?start=package_mvp')">💬 Связаться</button>
     </div>
-    <div class="step reveal">
-      <div class="step-num">02</div>
-      <div class="step-content">
-        <h3>Приходи в киберклуб</h3>
-        <p>Выбери удобный клуб-партнёр во Владивостоке. Мы бронируем места — тебе нужен только ты сам.</p>
-      </div>
+
+    <!-- MVP → GROWTH -->
+    <div class="pricing-card featured reveal">
+      <div class="pricing-badge">Популярный</div>
+      <h3 class="pricing-title">MVP → Growth</h3>
+      <div class="pricing-amount">119 990 ₽</div>
+      <p class="pricing-desc">3 месяца</p>
+      <ul class="pricing-features">
+        <li>Optimization & масштабирование</li>
+        <li>Growth стратегия</li>
+        <li>SEO & маркетинг</li>
+        <li>Investor pitch</li>
+        <li>Hiring assistance</li>
+        <li>12 консультаций</li>
+      </ul>
+      <button class="btn-modal btn-telegram" onclick="window.open('https://t.me/cybergipsybot?start=package_growth')">💬 Связаться</button>
     </div>
-    <div class="step reveal">
-      <div class="step-num">03</div>
-      <div class="step-content">
-        <h3>Садись и кодь</h3>
-        <p>Всё уже настроено. Открывай IDE, клонируй репо, запускай проект. Работай над своим или присоединяйся к командному.</p>
-      </div>
-    </div>
-    <div class="step reveal">
-      <div class="step-num">04</div>
-      <div class="step-content">
-        <h3>Расти в комьюнити</h3>
-        <p>Делись прогрессом, получай фидбек, находи соратников для своих идей. Вместе — быстрее.</p>
-      </div>
+
+    <!-- FULL CYCLE -->
+    <div class="pricing-card reveal">
+      <div class="pricing-badge">Для амбициозных</div>
+      <h3 class="pricing-title">Full Cycle</h3>
+      <div class="pricing-amount">239 990 ₽</div>
+      <p class="pricing-desc">6 месяцев</p>
+      <ul class="pricing-features">
+        <li>Персональный AI advisor</li>
+        <li>Weekly стратегические сессии</li>
+        <li>Technical менторство</li>
+        <li>Investor relations</li>
+        <li>Ops оптимизация</li>
+        <li>Unlimited консультации</li>
+      </ul>
+      <button class="btn-modal btn-telegram" onclick="window.open('https://t.me/cybergipsybot?start=package_full')">💬 Связаться</button>
     </div>
   </div>
 </section>
 
-<section id="who">
+<!-- CITIES SECTION -->
+<section id="cities" class="cities-section">
   <div class="section-header reveal">
-    <div class="section-tag">// для кого</div>
-    <h2 class="section-title">Любой уровень — <span>welcome</span></h2>
+    <div class="section-tag">// где нас найти</div>
+    <h2 class="section-title">Развиваемся в <span>двух городах</span></h2>
   </div>
-  <div class="audience-grid">
-    <div class="audience-card reveal">
-      <span class="audience-emoji">🌱</span>
-      <h3 class="audience-title">Новичок</h3>
-      <p class="audience-desc">Хочешь попробовать — мы покажем с чего начать. Python, HTML, первый сайт за вечер.</p>
+  
+  <div class="cities-grid">
+    <!-- ВЛАДИВОСТОК -->
+    <div class="city-card reveal">
+      <span class="city-emoji">🏔️</span>
+      <h2 class="city-name">Владивосток</h2>
+      <p class="city-info">Родина CyberGipsy. Здесь всё началось, и здесь самое активное комьюнити.</p>
+      
+      <div class="city-schedule">
+        <strong>📅 Расписание:</strong><br>
+        🔴 Вторник 18:00-22:00<br>
+        🔴 Четверг 18:00-22:00<br>
+        🔴 Суббота 12:00-18:00
+      </div>
+      
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+        <strong>Киберклубы-партнёры:</strong><br>
+        • Cyber Arena<br>
+        • Pro Gaming Zone<br>
+        • Code House
+      </p>
+      
+      <button class="btn-modal btn-form" onclick="window.open('https://t.me/cybergipsybot')">📍 Записаться</button>
     </div>
-    <div class="audience-card reveal">
-      <span class="audience-emoji">💻</span>
-      <h3 class="audience-title">Учащийся</h3>
-      <p class="audience-desc">Проходишь курсы? Кодь в компании, а не в одиночку дома. Мотивация ×10.</p>
-    </div>
-    <div class="audience-card reveal">
-      <span class="audience-emoji">⚡</span>
-      <h3 class="audience-title">Джун / Мидл</h3>
-      <p class="audience-desc">Пет-проекты, опен-сорс, подготовка к собесам. Среда для роста.</p>
-    </div>
-    <div class="audience-card reveal">
-      <span class="audience-emoji">🚀</span>
-      <h3 class="audience-title">Предприниматель</h3>
-      <p class="audience-desc">Собираешь MVP? Найди разработчика-партнёра прямо за соседним столом.</p>
+
+    <!-- МОСКВА -->
+    <div class="city-card reveal">
+      <span class="city-emoji">🏙️</span>
+      <h2 class="city-name">Москва</h2>
+      <p class="city-info">Быстро растущий филиал. Присоединяйся к столичному IT комьюнити.</p>
+      
+      <div class="city-schedule">
+        <strong>📅 Расписание:</strong><br>
+        🔵 Среда 18:00-22:00<br>
+        🔵 Пятница 18:00-22:00<br>
+        🔵 Воскресенье 12:00-18:00
+      </div>
+      
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+        <strong>Киберклубы-партнёры:</strong><br>
+        • Pro Club<br>
+        • Gaming Palace<br>
+        • Dev House
+      </p>
+      
+      <button class="btn-modal btn-form" onclick="window.open('https://t.me/cybergipsybot')">📍 Записаться</button>
     </div>
   </div>
 </section>
 
-<section>
+<!-- CTA SECTION -->
+<section id="contact">
   <div class="terminal-section reveal">
     <div class="terminal-bar">
       <div class="terminal-dot"></div>
       <div class="terminal-dot"></div>
       <div class="terminal-dot"></div>
-      <span class="terminal-title">cybergipsy@vladivostok:~</span>
+      <span class="terminal-title">cybergipsy@bot:~</span>
     </div>
     <div class="terminal-body">
-      <div><span class="prompt">$</span> <span class="cmd">cd /cybergipsy</span></div>
-      <div><span class="prompt">$</span> <span class="cmd">cat mission.txt</span></div>
-      <div><span class="output">Сделать программирование доступным.</span></div>
-      <div><span class="output">Убрать барьеры: дорогой ноутбук, одиночество, страх начать.</span></div>
-      <div><span class="output">Дать каждому мощный ПК, софт и комьюнити — бесплатно.</span></div>
-      <div><span class="comment"># Владивосток — это только начало.</span></div>
-      <div><span class="prompt">$</span> <span class="cmd">./join.sh</span><span class="cursor-blink"></span></div>
+      <div><span class="prompt">$</span> <span class="cmd">start()</span></div>
+      <div><span class="output">🤖 CyberGipsy Bot запущен</span></div>
+      <div><span class="output">Готов помочь с:</span></div>
+      <div><span class="output">  📚 Обучением</span></div>
+      <div><span class="output">  💼 AI Консультациями</span></div>
+      <div><span class="output">  👥 Комьюнити</span></div>
+      <div><span class="output">  🚀 Пакетами для стартапов</span></div>
+      <div><span class="comment"># Свяжись и давайте стартовать!</span></div>
+      <div><span class="prompt">$</span> <span class="cmd">./connect.sh</span><span class="cursor-blink"></span></div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="location-section reveal">
-    <span class="location-flag">🏔️</span>
-    <div class="location-city">Владивосток</div>
-    <p class="location-info">
-      Встречи проходят в киберспортивных клубах города. Выбери ближайший к себе — мы публикуем расписание и адреса в Telegram-канале. Скоро — новые города.
+<!-- MODAL FOR BOT -->
+<div class="modal-overlay" id="botModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeBotModal()">✕</button>
+    
+    <div class="modal-title">💬 CyberGipsy Bot</div>
+    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
+      Выбери, как с нами связаться:
+    </p>
+    
+    <div class="modal-buttons">
+      <a href="https://t.me/cybergipsybot" target="_blank" class="btn-modal btn-telegram">
+        💬 Telegram Bot
+      </a>
+      <button class="btn-modal btn-form" onclick="openFormModal()">
+        📝 Форма
+      </button>
+    </div>
+    
+    <hr style="margin: 24px 0; border: none; border-top: 1px solid var(--border-light);">
+    
+    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+      <strong>Что может сделать бот:</strong><br>
+      ✓ Рассказать о всех услугах<br>
+      ✓ Помочь выбрать пакет<br>
+      ✓ Ответить на вопросы<br>
+      ✓ Забронировать консультацию<br>
+      ✓ Добавить тебя в комьюнити
     </p>
   </div>
-</section>
+</div>
 
-<section id="join" class="cta-section">
-  <div class="reveal">
-    <div class="cta-free">Бесплатно • Free</div>
-    <h2 class="cta-title">Готов <span class="hl">кодить</span>?</h2>
-    <p class="cta-desc">Вступай в Telegram-чат CyberGipsy, узнай расписание и приходи на ближайшую встречу.</p>
-    <a href="#" class="btn-primary" style="font-size: 1rem; padding: 20px 48px;">🚀 Вступить в Telegram</a>
+<!-- FORM MODAL -->
+<div class="modal-overlay" id="formModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeFormModal()">✕</button>
+    
+    <div class="modal-title">Давай подружимся 👋</div>
+    <p style="color: var(--text-muted); margin-bottom: 20px;">Заполни форму и мы свяжемся с тобой:</p>
+    
+    <form onsubmit="submitForm(event)">
+      <div style="margin-bottom: 16px;">
+        <input type="text" placeholder="Твоё имя" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-light); border-radius: 6px; font-family: inherit;">
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <input type="email" placeholder="Email" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-light); border-radius: 6px; font-family: inherit;">
+      </div>
+      
+      <div style="margin-bottom: 16px;">
+        <input type="text" placeholder="Телефон (опционально)" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-light); border-radius: 6px; font-family: inherit;">
+      </div>
+      
+      <div style="margin-bottom: 20px;">
+        <select required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-light); border-radius: 6px; font-family: inherit;">
+          <option value="">Что тебя интересует?</option>
+          <option value="training">📚 Свободное обучение</option>
+          <option value="courses">🎓 Структурированные курсы</option>
+          <option value="business">💼 AI Консультация</option>
+          <option value="startup">🚀 Пакет для стартапа</option>
+          <option value="mentoring">👨‍💼 Менторство</option>
+          <option value="community">👥 Комьюнити</option>
+        </select>
+      </div>
+      
+      <button type="submit" style="width: 100%; padding: 12px; background: var(--accent-cyan); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 1px;">
+        Отправить
+      </button>
+    </form>
   </div>
-</section>
+</div>
 
 <footer>
   <div class="footer-logo"><span class="cy">Cyber</span><span class="gi">Gipsy</span></div>
-  <div class="footer-city">Владивосток, Россия</div>
+  <div class="footer-cities">🏔️ Владивосток • 🏙️ Москва • 🌍 Скоро везде</div>
   <div class="footer-links">
-    <a href="#">Telegram</a>
-    <a href="#">Instagram</a>
+    <a href="https://t.me/cybergipsybot" target="_blank">Telegram Bot</a>
+    <a href="https://t.me/cybergipsyclub" target="_blank">Telegram Channel</a>
+    <a href="#">Discord</a>
     <a href="#">GitHub</a>
-    <a href="#">VK</a>
   </div>
-  <div class="footer-copy">© 2026 CyberGipsy. Кодь свободно.</div>
+  <div class="footer-copy">© 2025 CyberGipsy. Программируй свободно.</div>
 </footer>
 
 <script>
+function openBotModal() {
+  document.getElementById('botModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBotModal() {
+  document.getElementById('botModal').classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+function openFormModal() {
+  document.getElementById('formModal').classList.add('active');
+}
+
+function closeFormModal() {
+  document.getElementById('formModal').classList.remove('active');
+}
+
+function submitForm(event) {
+  event.preventDefault();
+  alert('✅ Спасибо! Мы скоро свяжемся с тобой! 🚀');
+  closeFormModal();
+}
+
+document.getElementById('botModal').addEventListener('click', (e) => {
+  if (e.target.id === 'botModal') closeBotModal();
+});
+
+document.getElementById('formModal').addEventListener('click', (e) => {
+  if (e.target.id === 'formModal') closeFormModal();
+});
+
+// Reveal animations
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
@@ -599,11 +908,15 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 reveals.forEach(el => observer.observe(el));
 
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
     const target = document.querySelector(a.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    if (target && a.getAttribute('href') !== '#') {
+      target.scrollIntoView({ behavior: 'smooth' });
+      closeBotModal();
+    }
   });
 });
 </script>
