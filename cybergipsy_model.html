@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberGipsy Модель — Портфель микробизнесов | Vibe Coding</title>
+<meta name="description" content="Бизнес-модель: 18 микробизнесов по $30-40K/год. Vibe Coding + AI инструменты для контента и SEO.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent-cyan: #0891b2;
+  --accent-cyan-deep: #065f73;
+  --accent-magenta: #a21caf;
+  --accent-magenta-deep: #86198f;
+  --accent-green: #16a34a;
+  --accent-amber: #d97706;
+  --accent-purple: #7c3aed;
+  --bg-white: #fafbfc;
+  --bg-light: #f1f3f5;
+  --bg-card: #ffffff;
+  --bg-dark-section: #0f172a;
+  --text-black: #0f172a;
+  --text-dark: #1e293b;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.05);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--bg-white);
+  color: var(--text-body);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+.grid-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 14px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.nav-logo {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800; font-size: 1.4rem; letter-spacing: 3px; text-transform: uppercase;
+}
+.nav-logo .cy { color: var(--accent-cyan); }
+.nav-logo .gi { color: var(--accent-magenta); }
+
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--accent-cyan); }
+
+/* HERO */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  padding: 120px 20px 80px; z-index: 1; overflow: hidden;
+}
+
+.hero-gradient {
+  position: absolute; width: 700px; height: 700px;
+  border-radius: 50%; filter: blur(180px); opacity: 0.1; z-index: 0;
+}
+.hero-gradient-1 { top: -10%; left: 10%; background: var(--accent-cyan); }
+.hero-gradient-2 { bottom: -10%; right: 10%; background: var(--accent-magenta); }
+
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
+
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem; color: var(--accent-green);
+  letter-spacing: 3px; text-transform: uppercase; margin-bottom: 24px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+}
+
+.hero-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 900;
+  line-height: 1.1; letter-spacing: -1px; margin-bottom: 16px;
+  color: var(--text-black);
+  opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+}
+.hero-title .vibe { color: var(--accent-cyan); }
+.hero-title .code { color: var(--accent-magenta); }
+
+.hero-desc {
+  font-size: 1.2rem; color: var(--text-body);
+  max-width: 700px; margin: 0 auto 40px; line-height: 1.8;
+  opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards;
+}
+
+/* SECTIONS */
+section { position: relative; z-index: 1; padding: 100px 20px; }
+.section-header { text-align: center; margin-bottom: 64px; }
+.section-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+  color: var(--accent-green); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+  letter-spacing: 1px; color: var(--text-black);
+}
+.section-title span { color: var(--accent-cyan); }
+
+/* MODEL CARD */
+.model-intro {
+  background: linear-gradient(135deg, rgba(8,145,178,0.05), rgba(162,28,175,0.05));
+  border: 2px solid var(--border-light);
+  border-radius: 16px;
+  padding: 48px;
+  max-width: 900px;
+  margin: 0 auto 64px;
+  text-align: center;
+}
+
+.model-number {
+  font-size: 3rem; font-weight: 800;
+  color: var(--accent-cyan);
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 16px;
+}
+
+.model-title {
+  font-size: 1.6rem; font-weight: 700;
+  color: var(--text-black);
+  margin-bottom: 16px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.model-desc {
+  font-size: 1.05rem;
+  color: var(--text-body);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.model-earnings {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent-green);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* STEPS */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.step-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  padding: 32px;
+  border-radius: 12px;
+  transition: all 0.4s;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.step-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-cyan);
+}
+
+.step-card:hover::before { opacity: 1; }
+
+.step-number {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  margin-bottom: 8px;
+}
+
+.step-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-black);
+  margin-bottom: 12px;
+}
+
+.step-desc {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+/* TOOLS GRID */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.tool-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  padding: 28px;
+  border-radius: 12px;
+  transition: all 0.3s;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.tool-card:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.tool-badge {
+  display: inline-block;
+  background: var(--accent-cyan);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tool-badge.writing { background: var(--accent-magenta); }
+.tool-badge.video { background: var(--accent-green); }
+.tool-badge.design { background: var(--accent-amber); }
+.tool-badge.code { background: var(--accent-purple); }
+.tool-badge.analytics { background: #ec4899; }
+
+.tool-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-black);
+  margin-bottom: 8px;
+}
+
+.tool-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--accent-cyan);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.tool-desc {
+  font-size: 0.9rem;
+  color: var(--text-body);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.tool-use {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+  border-left: 3px solid var(--accent-cyan);
+  padding-left: 12px;
+}
+
+/* FINANCIAL */
+.financial-box {
+  background: linear-gradient(135deg, var(--bg-light), var(--bg-white));
+  border: 2px solid var(--accent-green);
+  border-radius: 16px;
+  padding: 48px;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.financial-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-black);
+  margin-bottom: 32px;
+}
+
+.financial-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 16px;
+}
+
+.financial-row:last-child {
+  border-bottom: none;
+  padding-top: 24px;
+  padding-bottom: 0;
+  border-top: 2px solid var(--accent-green);
+}
+
+.financial-label {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  text-align: left;
+}
+
+.financial-amount {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+
+/* TIMELINE */
+.timeline {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-magenta), var(--accent-green));
+  opacity: 0.3;
+}
+
+.timeline-item {
+  margin-bottom: 48px;
+  padding-left: 100px;
+  position: relative;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60px;
+  height: 60px;
+  background: var(--accent-cyan);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 16px rgba(8,145,178,0.3);
+}
+
+.timeline-item:nth-child(2) .timeline-dot { background: var(--accent-magenta); box-shadow: 0 4px 16px rgba(162,28,175,0.3); }
+.timeline-item:nth-child(3) .timeline-dot { background: var(--accent-green); box-shadow: 0 4px 16px rgba(22,163,74,0.3); }
+.timeline-item:nth-child(4) .timeline-dot { background: var(--accent-amber); box-shadow: 0 4px 16px rgba(217,119,6,0.3); }
+.timeline-item:nth-child(5) .timeline-dot { background: var(--accent-cyan); }
+.timeline-item:nth-child(6) .timeline-dot { background: var(--accent-magenta); }
+.timeline-item:nth-child(7) .timeline-dot { background: var(--accent-green); }
+.timeline-item:nth-child(8) .timeline-dot { background: var(--accent-amber); }
+.timeline-item:nth-child(9) .timeline-dot { background: #ec4899; }
+
+.timeline-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-black);
+  margin-bottom: 8px;
+}
+
+.timeline-desc {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+/* FOOTER */
+footer {
+  position: relative; z-index: 1; background: var(--bg-dark-section);
+  padding: 48px 20px; text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Orbitron', sans-serif; font-weight: 800;
+  font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 8px;
+}
+
+.footer-logo .cy { color: #22d3ee; }
+.footer-logo .gi { color: #d946ef; }
+
+.footer-links { display: flex; justify-content: center; gap: 24px; margin: 24px 0; }
+.footer-links a { color: #94a3b8; text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+.footer-links a:hover { color: #22d3ee; }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  nav { padding: 12px 20px; }
+  .nav-links { display: none; }
+  section { padding: 60px 16px; }
+  .model-intro { padding: 32px 20px; }
+  .financial-box { padding: 32px 20px; }
+  .step-card { padding: 24px 16px; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .timeline::before { left: 20px; }
+  .timeline-item { padding-left: 80px; }
+  .timeline-dot { width: 50px; height: 50px; }
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<nav>
+  <a href="cybergipsy_website_v2.html" style="text-decoration: none; color: inherit;">
+    <div class="nav-logo"><span class="cy">Cyber</span><span class="gi">Gipsy</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="cybergipsy_website_v2.html">← Назад на главную</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-gradient hero-gradient-1"></div>
+  <div class="hero-gradient hero-gradient-2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🚀 Бизнес-модель CyberGipsy</div>
+    <h1 class="hero-title">
+      <span class="vibe">Vibe</span> <span class="code">Coding</span>
+    </h1>
+    <p class="hero-desc">
+      Портфель из 18 микробизнесов по $30-40K/год.<br>
+      Контент + SEO + Автоматизация = Масштабируемая фабрика с exit-сделками.
+    </p>
+  </div>
+</section>
+
+<!-- МОДЕЛЬ -->
+<section id="model">
+  <div class="section-header reveal">
+    <div class="section-tag">// суть модели</div>
+    <h2 class="section-title">18 микробизнесов = <span>масштабируемая фабрика</span></h2>
+  </div>
+
+  <div class="model-intro reveal">
+    <div class="model-number">18</div>
+    <div class="model-title">Микробизнесов в разных нишах</div>
+    <p class="model-desc">Каждый бизнес:</p>
+    <div class="model-earnings">💰 $30–40K/год дохода</div>
+    <p class="model-desc" style="margin-top: 20px; font-size: 0.95rem; color: var(--text-muted);">
+      Суть: Создаёшь → Доводишь до стабильности → Продаёшь → Повторяешь
+    </p>
+  </div>
+
+  <div style="max-width: 1000px; margin: 0 auto; padding: 64px 0;">
+    <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; color: var(--text-black); margin-bottom: 32px; text-align: center;">
+      Финансовая модель
+    </h3>
+    
+    <div class="financial-box">
+      <div class="financial-title">📊 Доход за цикл (8-12 месяцев)</div>
+      
+      <div class="financial-row">
+        <div class="financial-label">Доход 1 микробизнеса</div>
+        <div class="financial-amount">$30-40K</div>
+      </div>
+
+      <div class="financial-row">
+        <div class="financial-label">Расходы (API, контент, софт)</div>
+        <div class="financial-amount">$300-400/мес</div>
+      </div>
+
+      <div class="financial-row">
+        <div class="financial-label">Прибыль в месяц (стабильный период)</div>
+        <div class="financial-amount">$2-4K</div>
+      </div>
+
+      <div class="financial-row">
+        <div class="financial-label">Цена продажи микробизнеса</div>
+        <div class="financial-amount">$15-30K</div>
+      </div>
+
+      <div class="financial-row">
+        <div class="financial-label"><strong>👉 Прибыль от exit-сделки</strong></div>
+        <div class="financial-amount"><strong>$15-30K</strong></div>
+      </div>
+
+      <div class="financial-row">
+        <div class="financial-label"><strong style="font-size: 1.1rem;">Доход от 18 exit-сделок в год</strong></div>
+        <div class="financial-amount" style="font-size: 1.3rem;"><strong>$270-540K</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ИНСТРУМЕНТЫ -->
+<section id="tools">
+  <div class="section-header reveal">
+    <div class="section-tag">// 20 ai инструментов для vibe coding</div>
+    <h2 class="section-title">Полный стек для <span>создания бизнеса</span></h2>
+  </div>
+
+  <div class="tools-grid">
+    <!-- BASE & STRUCTURE -->
+    <div class="tool-card reveal">
+      <span class="tool-badge">base</span>
+      <div class="tool-name">Obsidian</div>
+      <div class="tool-price">БЕСПЛАТНО</div>
+      <div class="tool-desc">База знаний и структура всего проекта. Ссылаешь статьи между собой, создаёшь граф знаний.</div>
+      <div class="tool-use">✓ Семантика, структура, внутренняя перелинковка</div>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-badge">analytics</span>
+      <div class="tool-name">NotebookLM</div>
+      <div class="tool-price">БЕСПЛАТНО</div>
+      <div class="tool-desc">Анализ рынка, конкурентов, выявление пробелов для собственного контента.</div>
+      <div class="tool-use">✓ Конкурентный анализ, пробелы в контенте</div>
+    </div>
+
+    <!-- WRITING & CONTENT -->
+    <div class="tool-card reveal">
+      <span class="tool-badge writing">writing</span>
+      <div class="tool-name">Claude (Anthropic)</div>
+      <div class="tool-price">$20/мес</div>
+      <div class="tool-desc">Написание SEO-статей, структурированного контента, оптимизация на ключевые слова.</div>
+      <div class="tool-use">✓ Главный инструмент для контента</div>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-badge writing">writing</span>
+      <div class="tool-name">ChatGPT Plus</div>
+      <div class="tool-price">$20/мес</div>
+      <div class="tool-desc">Идеи, заголовки, копирайтинг, метаописания, оптимизация текста для SEO.</div>
+      <div class="tool-use">✓ Дополнение к Claude</div>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-badge writing">writing</span>
+      <div class="tool-name">Surfer SEO</div>
+      <div class="tool-price">$99/мес</div>
+      <div class="tool-desc">Анализ топ-10 конкурентов, рекомендации по структуре, длине, плотности ключевых слов.</div>
+      <div class="tool-use">✓ SEO оптимизация контента</div>
+    </div>
+
+    <!-- CODE & AUTOMATION -->
+    <div class="tool-card reveal">
+      <span class="tool-badge code">code</span>
+      <div class="tool-name">Cursor</div>
+      <div class="tool-price">$20/мес</div>
+      <div class="tool-desc">IDE с AI помощником. Пишешь код в 10 раз быстрее. Автодополнение и рефакторинг.</div>
+      <div class="tool-use">✓ Разработка сайтов и инструментов</div>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-badge code">code</span>
+      <div class="tool-name">OpenAI API (Codex)</div>
+      <div class="tool-price">$5-15/мес</div>
+      <div class="tool-desc">Автоматизация массовой генерации контента, работа с базами данных, парсинг.</div>
+      <div class="tool-use">✓ Автоматизация процессов</div>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-badge code">code</span>
+      <div class="tool-name">Make (Zapier)</div>
+      <div class="tool-price">$99/мес</div>
+      <div class="tool-desc">Соединяешь разные сервисы без кода. Например: публикация контента → отправка письма → аналитика.</div>
+      <div class="tool-use">✓ Workflow автоматизация</div>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-badge code">code</span>
+      <div class="tool-name">n8n</div>
+      <div class="tool-price">БЕСПЛАТНО</div>
+      <div class="tool-desc">Self-hosted альтернатива Zapier. Полный контроль над автоматизацией. Развертываешь на своём сервере.</div>
+      <div class="tool-use">✓ Полная автоматизация</div>
+    </div>
+
+    <!-- IMAGES & DESIGN -->
+    <div class="tool-card reveal">
+      <span class="tool-badge design">design</span>
+      <div class="tool-name">DALL-E 3</div>
+      <div class="tool-price">$15/мес</div>
+      <div class="tool-desc">Генерация изображений через ChatGPT. Используешь для обложек, иллюстраций, соцсетей.</div>
+      <div class="tool-use">✓ Обложки и иллюстрации статей</div>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-badge design">design</span>
+      <div class="tool-name">Midjourney</div>
+      <div class="tool-price">$30/мес</div>
+      <div class="tool-desc">Высокое качество изображений для премиум контента. Используется для брендинга.</div>
+      <div class="tool-use">✓ Премиум визуал для брендинга</div>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-badge design">design</span>
+      <div class="tool-name">Canva Pro</div>
+      <div class="tool-price">$180/год</div>
+      <div class="tool-desc">Дизайн соцсетей, баннеров, превью для видео. Быстрый способ создать красивые материалы.</div>
+      <div class="tool-use">✓ Быстрый дизайн для соцсетей</div>
+    </div>
+
+    <!-- VIDEO & SHORTS -->
+    <div class="tool-card reveal">
+      <span class="tool-badge video">video</span>
+      <div class="tool-name">Synthesia AI</div>
+      <div class="tool-price">$30/мес</div>
+      <div class="tool-desc">Создание видео с AI аватаром. Текст → видео за минуты. Идеально для YouTube и TikTok.</div>
+      <div class="tool-use">✓ Видео контент и shorts</div>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-badge video">video</span>
+      <div class="tool-name">Opus Clip</div>
+      <div class="tool-price">$30/мес</div>
+      <div class="tool-desc">Нарезаешь длинные видео в Reels и Shorts. AI выделяет самые интересные моменты.</div>
+      <div class="tool-use">✓ Shorts и Reels из длинного контента</div>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-badge video">video</span>
+      <div class="tool-name">Runway AI</div>
+      <div class="tool-price">$24/мес</div>
+      <div class="tool-desc">Удаление фона, расширение видео, создание эффектов без программирования.</div>
+      <div class="tool-use">✓ Редактирование видео</div>
+    </div>
+
+    <!-- SEO & ANALYTICS -->
+    <div class="tool-card reveal">
+      <span class="tool-badge analytics">analytics</span>
+      <div class="tool-name">Ahrefs</div>
+      <div class="tool-price">$99/мес</div>
+      <div class="tool-desc">Анализ трафика, позиций, бэклинков. Мониторинг прогресса микробизнеса.</div>
+      <div class="tool-use">✓ SEO мониторинг и аналитика</div>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-badge analytics">analytics</span>
+      <div class="tool-name">Google Analytics 4</div>
+      <div class="tool-price">БЕСПЛАТНО</div>
+      <div class="tool-desc">Отслеживание поведения пользователей, источников трафика, конверсий.</div>
+      <div class="tool-use">✓ Аналитика сайта</div>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-badge analytics">analytics</span>
+      <div class="tool-name">SEMrush</div>
+      <div class="tool-price">$120/мес</div>
+      <div class="tool-desc">Исследование ключевых слов, анализ конкурентов, местная SEO.</div>
+      <div class="tool-use">✓ Исследование и анализ</div>
+    </div>
+
+    <!-- HOSTING & PUBLISHING -->
+    <div class="tool-card reveal">
+      <span class="tool-badge code">code</span>
+      <div class="tool-name">Vercel / Netlify</div>
+      <div class="tool-price">$10-50/мес</div>
+      <div class="tool-desc">Хостинг сайтов с суперскоростью. Интеграция с GitHub, автодеплой при каждом коммите.</div>
+      <div class="tool-use">✓ Быстрый хостинг сайтов</div>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-badge code">code</span>
+      <div class="tool-name">WordPress + Elementor</div>
+      <div class="tool-price">$30-100/мес</div>
+      <div class="tool-desc">Классический стек для блогов и сайтов. Большой выбор плагинов для SEO.</div>
+      <div class="tool-use">✓ Альтернатива для классических сайтов</div>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 64px; padding: 32px; background: var(--bg-light); border-radius: 12px; max-width: 900px; margin-left: auto; margin-right: auto;">
+    <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.3rem; color: var(--text-black); margin-bottom: 16px;">
+      💰 Итоговые расходы на стек
+    </h3>
+    <p style="font-size: 1.1rem; color: var(--accent-green); font-weight: 700; font-family: 'JetBrains Mono', monospace; margin-bottom: 16px;">
+      $300-400/месяц для одного микробизнеса
+    </p>
+    <p style="color: var(--text-body); font-size: 0.95rem;">
+      Claude (20) + ChatGPT (20) + Cursor (20) + Surfer (99) + Make (99) + Ahrefs (99) + Vercel (20) = ~$380
+    </p>
+  </div>
+</section>
+
+<!-- ПРОЦЕСС -->
+<section id="process">
+  <div class="section-header reveal">
+    <div class="section-tag">// 9 шагов к exit-сделке</div>
+    <h2 class="section-title">От нуля к <span>продаже за $15-30K</span></h2>
+  </div>
+
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-dot">1</div>
+      <div>
+        <div class="timeline-title">Выбор ниши</div>
+        <div class="timeline-desc">Анализ спроса (Keyword Planner), слабой конкуренции (Ahrefs), потенциала. Выбираешь нишу с $30-40K потенциалом.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot">2</div>
+      <div>
+        <div class="timeline-title">Сбор семантики</div>
+        <div class="timeline-desc">Выписываешь 100-200 ключевых слов. Структурируешь в Obsidian. Создаёшь пилларные и кластерные статьи.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot">3</div>
+      <div>
+        <div class="timeline-title">Запуск сайта</div>
+        <div class="timeline-desc">Сайт на Next.js (Cursor + OpenAI) или WordPress + Elementor. SEO-friendly структура. Быстрая загрузка.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot">4</div>
+      <div>
+        <div class="timeline-title">Генерация контента</div>
+        <div class="timeline-desc">Claude пишет 50-100 статей. Surfer SEO оптимизирует. DALL-E генерирует изображения. Opus Clip нарезает shorts.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot">5</div>
+      <div>
+        <div class="timeline-title">Перелинковка и SEO</div>
+        <div class="timeline-desc">Внутренняя перелинковка в Obsidian. Бэклинки из своих сайтов. Технический SEO (скорость, структурированные данные).</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot">6</div>
+      <div>
+        <div class="timeline-title">Автоматизация</div>
+        <div class="timeline-desc">Make/n8n автоматизирует публикацию. Контент льется без твоего участия. Уходишь к следующему сайту.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot">7</div>
+      <div>
+        <div class="timeline-title">Стабильный трафик</div>
+        <div class="timeline-desc">За 3-6 месяцев: 10K-50K посещений/мес. Монетизация (AdSense, CPA, аффилиаты). $2-4K/мес доход.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot">8</div>
+      <div>
+        <div class="timeline-title">Упаковка (Due Diligence)</div>
+        <div class="timeline-desc">Готовишь метрики, финансы, процессы. Документируешь всю автоматизацию. Делаешь SOP для нового владельца.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot">9</div>
+      <div>
+        <div class="timeline-title">Продажа (EXIT)</div>
+        <div class="timeline-desc">Продаёшь на Flippa, Quiet Light или напрямую. Цена: 12-36 месячных доходов ($15-30K). Чистая прибыль в карман!</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 64px; padding: 48px; background: linear-gradient(135deg, rgba(162,28,175,0.05), rgba(8,145,178,0.05)); border-radius: 16px; max-width: 900px; margin-left: auto; margin-right: auto;">
+    <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--text-black); margin-bottom: 24px;">
+      ⏱️ Цикл: 8-12 месяцев от идеи до exit
+    </h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px;">
+      <div style="padding: 20px; background: white; border-radius: 12px; border-left: 4px solid var(--accent-cyan);">
+        <div style="font-size: 2rem; font-weight: 700; color: var(--accent-cyan); margin-bottom: 8px;">3-4 мес</div>
+        <div style="font-size: 0.9rem; color: var(--text-body);">Подготовка (выбор, сайт, контент)</div>
+      </div>
+      <div style="padding: 20px; background: white; border-radius: 12px; border-left: 4px solid var(--accent-magenta);">
+        <div style="font-size: 2rem; font-weight: 700; color: var(--accent-magenta); margin-bottom: 8px;">3-4 мес</div>
+        <div style="font-size: 0.9rem; color: var(--text-body);">Трафик и доход</div>
+      </div>
+      <div style="padding: 20px; background: white; border-radius: 12px; border-left: 4px solid var(--accent-green);">
+        <div style="font-size: 2rem; font-weight: 700; color: var(--accent-green); margin-bottom: 8px;">2-4 мес</div>
+        <div style="font-size: 0.9rem; color: var(--text-body);">Упаковка и продажа</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- СУТЬ -->
+<section style="background: linear-gradient(135deg, var(--bg-light), white);">
+  <div class="section-header reveal">
+    <div class="section-tag">// суть в одной фразе</div>
+    <h2 class="section-title">Контент + SEO + Автоматизация<span> = Фабрика</span></h2>
+  </div>
+
+  <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 48px; background: white; border-radius: 16px; border: 2px solid var(--border-light);">
+    <p style="font-size: 1.3rem; color: var(--text-black); line-height: 1.8; margin-bottom: 24px;">
+      <strong>Ты создаёшь веб-сайты, которые создают деньги.</strong>
+    </p>
+    <p style="font-size: 1.1rem; color: var(--text-body); line-height: 1.8; margin-bottom: 32px;">
+      Не нужно продавать услуги или ждать клиентов. Контент сам привлекает трафик, трафик приносит деньги, а потом ты продаёшь весь бизнес целиком за $15-30K и берёшься за следующий.
+    </p>
+    
+    <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+      <div style="padding: 16px 24px; background: var(--bg-light); border-radius: 8px; border-left: 4px solid var(--accent-cyan);">
+        <div style="font-weight: 700; color: var(--accent-cyan); margin-bottom: 4px;">КОНТЕНТ</div>
+        <div style="font-size: 0.9rem; color: var(--text-body);">Claude AI пишет</div>
+      </div>
+      <div style="padding: 16px 24px; background: var(--bg-light); border-radius: 8px; border-left: 4px solid var(--accent-magenta);">
+        <div style="font-weight: 700; color: var(--accent-magenta); margin-bottom: 4px;">SEO</div>
+        <div style="font-size: 0.9rem; color: var(--text-body);">Surfer оптимизирует</div>
+      </div>
+      <div style="padding: 16px 24px; background: var(--bg-light); border-radius: 8px; border-left: 4px solid var(--accent-green);">
+        <div style="font-weight: 700; color: var(--accent-green); margin-bottom: 4px;">АВТОМАТИЗАЦИЯ</div>
+        <div style="font-size: 0.9rem; color: var(--text-body);">Make публикует</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="text-align: center; padding: 120px 20px; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));">
+  <h2 style="font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); color: white; margin-bottom: 24px; font-weight: 800;">
+    Готов стартовать свой микробизнес?
+  </h2>
+  <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto 40px; line-height: 1.8;">
+    Получи консультацию у AI специалиста по выбору ниши и запуску первого сайта.
+  </p>
+  <a href="cybergipsy_website_v2.html" style="display: inline-block; padding: 16px 48px; background: white; color: var(--accent-cyan); font-weight: 700; text-decoration: none; border-radius: 8px; font-family: 'Orbitron', sans-serif; letter-spacing: 2px; transition: all 0.3s;">
+    🚀 НАЗАД НА ГЛАВНУЮ
+  </a>
+</section>
+
+<footer>
+  <div class="footer-logo"><span class="cy">Cyber</span><span class="gi">Gipsy</span></div>
+  <p style="color: #64748b; margin: 12px 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+    Vibe Coding & Micro Business Empire
+  </p>
+  <div class="footer-links">
+    <a href="cybergipsy_website_v2.html">Главная</a>
+    <a href="https://t.me/cybergipsybot" target="_blank">Telegram Bot</a>
+    <a href="https://t.me/cybergipsyclub" target="_blank">Telegram Channel</a>
+  </div>
+  <p style="font-size: 0.75rem; color: #475569;">© 2025 CyberGipsy. Контент + SEO + Автоматизация = Фабрика</p>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 100);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

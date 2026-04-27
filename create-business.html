@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Создать AI бизнес с нами — CyberGipsy</title>
+<meta name="description" content="Full-cycle создание AI микробизнеса с нуля. Ниша, сайт, 100+ статей, автоматизация. Первый доход через 3 месяца.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #090c10;
+  --surface: #0e1318;
+  --card: #131920;
+  --card-hover: #171f28;
+  --border: rgba(255,255,255,0.06);
+  --border-bright: rgba(255,255,255,0.12);
+  --lime: #b8ff35;
+  --lime-dim: rgba(184,255,53,0.1);
+  --lime-glow: rgba(184,255,53,0.25);
+  --magenta: #ff35b8;
+  --magenta-dim: rgba(255,53,184,0.1);
+  --cyan: #35d4ff;
+  --text: #e8edf3;
+  --text-muted: #6b7a8d;
+  --text-dim: #3d4a58;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background: var(--black);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0; opacity: 0.5;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(9,12,16,0.85); backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: 1.3rem; letter-spacing: 2px; text-decoration: none;
+}
+.nav-logo .cy { color: var(--lime); }
+.nav-logo .gi { color: var(--magenta); }
+
+.nav-links { display: flex; gap: 40px; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--magenta); }
+.nav-btn {
+  background: var(--magenta) !important; color: var(--black) !important;
+  padding: 9px 24px !important; border-radius: 4px !important;
+  font-weight: 700 !important; font-family: 'Syne', sans-serif !important;
+  font-size: 0.85rem !important; transition: all 0.3s !important;
+}
+.nav-btn:hover { box-shadow: 0 0 24px rgba(255,53,184,0.35) !important; }
+
+/* HERO */
+.hero {
+  position: relative; min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+  padding: 140px 48px 80px; z-index: 1; overflow: hidden; gap: 80px;
+}
+.hero-blob {
+  position: absolute; border-radius: 50%; filter: blur(120px);
+  opacity: 0.12; pointer-events: none;
+}
+.hero-blob-1 { width: 500px; height: 500px; background: var(--magenta); top: -5%; left: -5%; }
+.hero-blob-2 { width: 400px; height: 400px; background: var(--lime); bottom: 0; right: 10%; }
+
+.hero-left { position: relative; z-index: 2; }
+.hero-label {
+  font-family: 'Space Mono', monospace; font-size: 0.75rem;
+  color: var(--magenta); letter-spacing: 4px; text-transform: uppercase;
+  margin-bottom: 32px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+}
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(3rem, 5.5vw, 6rem);
+  font-weight: 800; line-height: 0.95; letter-spacing: -2px; margin-bottom: 32px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
+}
+.hero-title .m { color: var(--magenta); }
+.hero-title .l { color: var(--lime); }
+.hero-desc {
+  font-size: 1.1rem; color: var(--text-muted); line-height: 1.75;
+  margin-bottom: 48px; max-width: 500px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
+}
+.hero-btns {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
+}
+
+.hero-right {
+  position: relative; z-index: 2;
+  opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+}
+
+.timeline-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 4px; padding: 40px 36px;
+}
+.timeline-title {
+  font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+  color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.tl-item {
+  display: flex; gap: 20px; margin-bottom: 24px; align-items: flex-start;
+}
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700;
+}
+.tl-dot.m1 { background: var(--magenta-dim); color: var(--magenta); border: 1px solid var(--magenta); }
+.tl-dot.m2 { background: var(--lime-dim); color: var(--lime); border: 1px solid var(--lime); }
+.tl-dot.m3 { background: rgba(53,212,255,0.1); color: var(--cyan); border: 1px solid var(--cyan); }
+.tl-dot.m46 { background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border-bright); }
+.tl-content {}
+.tl-period {
+  font-family: 'Space Mono', monospace; font-size: 0.68rem;
+  color: var(--text-dim); letter-spacing: 1px; margin-bottom: 2px;
+}
+.tl-name {
+  font-weight: 700; font-size: 0.95rem; margin-bottom: 2px;
+}
+.tl-result {
+  font-size: 0.85rem; color: var(--text-muted);
+}
+.tl-result .accent { color: var(--lime); font-weight: 700; }
+
+/* SECTION BASE */
+section { position: relative; z-index: 1; padding: 120px 48px; }
+.container { max-width: 1300px; margin: 0 auto; }
+.section-label {
+  font-family: 'Space Mono', monospace; font-size: 0.72rem;
+  color: var(--magenta); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 16px;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800; line-height: 1.1; letter-spacing: -1px; margin-bottom: 64px;
+}
+.section-title .l { color: var(--lime); }
+
+/* PACKAGES */
+.packages-section {
+  background: var(--surface); border-top: 1px solid var(--border);
+}
+
+.packages-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+}
+
+.package-card {
+  background: var(--card); border: 1px solid var(--border);
+  padding: 60px 48px; position: relative; transition: all 0.4s;
+}
+.package-card.featured {
+  background: linear-gradient(135deg, rgba(255,53,184,0.08), rgba(184,255,53,0.04));
+  border-color: var(--magenta);
+}
+.package-card:hover { transform: translateY(-4px); }
+
+.package-tag {
+  display: inline-block; padding: 6px 16px; border-radius: 2px;
+  font-family: 'Space Mono', monospace; font-size: 0.68rem;
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px; font-weight: 700;
+}
+.package-tag.basic { background: var(--lime-dim); color: var(--lime); border: 1px solid rgba(184,255,53,0.2); }
+.package-tag.premium { background: var(--magenta-dim); color: var(--magenta); border: 1px solid rgba(255,53,184,0.2); }
+
+.package-name {
+  font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800;
+  margin-bottom: 12px;
+}
+.package-price {
+  font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 800;
+  line-height: 1; margin-bottom: 8px;
+}
+.package-card:not(.featured) .package-price { color: var(--lime); }
+.package-card.featured .package-price { color: var(--magenta); }
+
+.package-note {
+  font-size: 0.85rem; color: var(--text-muted); margin-bottom: 40px;
+}
+
+.package-divider {
+  height: 1px; background: var(--border); margin-bottom: 32px;
+}
+
+.package-features { list-style: none; margin-bottom: 40px; }
+.package-features li {
+  padding: 12px 0; border-bottom: 1px solid var(--border);
+  font-size: 0.9rem; display: flex; align-items: flex-start; gap: 12px;
+}
+.package-features li:last-child { border-bottom: none; }
+.feat-check { color: var(--lime); flex-shrink: 0; margin-top: 2px; }
+.package-card.featured .feat-check { color: var(--magenta); }
+
+.package-btn {
+  width: 100%; padding: 16px;
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+  border: none; cursor: pointer; border-radius: 2px; transition: all 0.3s;
+}
+.package-card:not(.featured) .package-btn {
+  background: var(--lime); color: var(--black);
+}
+.package-card.featured .package-btn {
+  background: var(--magenta); color: var(--black);
+}
+.package-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+/* PROCESS */
+.process-section { background: var(--black); border-top: 1px solid var(--border); }
+
+.phases {
+  display: flex; flex-direction: column; gap: 2px;
+}
+.phase {
+  background: var(--card); border: 1px solid var(--border);
+  display: grid; grid-template-columns: 200px 1fr 1fr; gap: 0;
+  transition: all 0.3s;
+}
+.phase:hover { border-color: var(--border-bright); }
+
+.phase-period {
+  padding: 40px 36px;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.phase-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 8px;
+}
+.phase-time {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem; font-weight: 800; line-height: 1;
+}
+.phase-time.p1 { color: var(--magenta); }
+.phase-time.p2 { color: var(--lime); }
+.phase-time.p3 { color: var(--cyan); }
+.phase-time.p4 { color: var(--text-muted); }
+
+.phase-content {
+  padding: 40px 36px;
+  border-right: 1px solid var(--border);
+}
+.phase-title {
+  font-family: 'Syne', sans-serif; font-size: 1.15rem;
+  font-weight: 700; margin-bottom: 12px;
+}
+.phase-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
+
+.phase-result {
+  padding: 40px 36px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.phase-result-label {
+  font-family: 'Space Mono', monospace; font-size: 0.68rem;
+  color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;
+}
+.phase-result-val {
+  font-family: 'Syne', sans-serif; font-size: 1.3rem;
+  font-weight: 800; color: var(--lime);
+}
+
+/* TOOLS */
+.tools-section {
+  background: var(--surface); border-top: 1px solid var(--border);
+}
+
+.tools-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px;
+}
+
+.tool-item {
+  background: var(--card); border: 1px solid var(--border);
+  padding: 28px 24px; transition: all 0.3s;
+}
+.tool-item:hover { border-color: var(--border-bright); transform: translateY(-3px); }
+
+.tool-cat {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--text-dim);
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;
+}
+.tool-name {
+  font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+  margin-bottom: 6px;
+}
+.tool-use {
+  font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;
+}
+
+/* COMPARE */
+.compare-section { border-top: 1px solid var(--border); }
+
+.compare-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.compare-table th {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  padding: 20px 24px; text-align: left;
+  background: var(--card); border: 1px solid var(--border);
+}
+.compare-table th.h-basic { color: var(--lime); }
+.compare-table th.h-premium { color: var(--magenta); }
+
+.compare-table td {
+  padding: 18px 24px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.compare-table td:first-child { font-weight: 600; color: var(--text); }
+.compare-table td.yes { color: var(--lime); font-weight: 700; }
+.compare-table td.yes-m { color: var(--magenta); font-weight: 700; }
+.compare-table tr:hover td { background: var(--card); }
+
+/* CTA */
+.cta-section {
+  text-align: center; overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+.cta-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(255,53,184,0.06) 0%, transparent 70%);
+}
+.cta-inner { position: relative; z-index: 2; }
+.cta-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 800; line-height: 1.05; margin-bottom: 24px;
+}
+.cta-title .m { color: var(--magenta); }
+.cta-title .l { color: var(--lime); }
+.cta-desc { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 48px; max-width: 560px; margin-left: auto; margin-right: auto; }
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 40px; background: var(--magenta); color: var(--black);
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+  text-decoration: none; border: none; cursor: pointer; border-radius: 2px;
+  transition: all 0.3s;
+}
+.btn-primary:hover { box-shadow: 0 0 40px rgba(255,53,184,0.35); transform: translateY(-2px); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 40px; background: transparent; color: var(--text);
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+  text-decoration: none; border: 1px solid var(--border-bright); border-radius: 2px;
+  transition: all 0.3s; cursor: pointer;
+}
+.btn-ghost:hover { border-color: var(--lime); color: var(--lime); }
+
+footer {
+  background: var(--black); border-top: 1px solid var(--border);
+  position: relative; z-index: 1; padding: 48px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;
+}
+.footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; letter-spacing: 2px; text-decoration: none; }
+.footer-links { display: flex; gap: 32px; }
+.footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+.footer-links a:hover { color: var(--magenta); }
+.footer-copy { font-size: 0.8rem; color: var(--text-dim); font-family: 'Space Mono', monospace; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 120px 20px 60px; gap: 40px; }
+  section { padding: 80px 20px; }
+  .packages-grid { grid-template-columns: 1fr; }
+  .tools-grid { grid-template-columns: repeat(2, 1fr); }
+  .phase { grid-template-columns: 1fr; }
+  .phase-period, .phase-content { border-right: none; border-bottom: 1px solid var(--border); }
+  .compare-table { font-size: 0.8rem; }
+  .compare-table td, .compare-table th { padding: 12px 14px; }
+  footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="cybergipsy_website_v2.html" class="nav-logo"><span class="cy">Cyber</span><span class="gi">Gipsy</span></a>
+  <div class="nav-links">
+    <a href="cybergipsy_website_v2.html">← Главная</a>
+    <a href="cybergipsy_model.html">Модель</a>
+    <a href="buy-business.html">Купить бизнес</a>
+    <a href="https://t.me/cybergipsybot" target="_blank" class="nav-btn">Начать</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+
+  <div class="hero-left">
+    <div class="hero-label">// done-for-you · ai micro business</div>
+    <h1 class="hero-title">
+      Мы строим.<br>
+      Ты <span class="m">учишься</span><br>
+      и <span class="l">зарабатываешь.</span>
+    </h1>
+    <p class="hero-desc">
+      Full-cycle создание AI микробизнеса с нуля — ниша, сайт, 100+ SEO-статей, полная автоматизация. Первый доход через 3 месяца. Готов масштабироваться дальше сам.
+    </p>
+    <div class="hero-btns">
+      <a href="https://t.me/cybergipsybot" target="_blank" class="btn-primary">🚀 Начать сейчас</a>
+      <a href="#packages" class="btn-ghost">Смотреть пакеты ↓</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="timeline-card">
+      <div class="timeline-title">Твой путь к доходу</div>
+      <div class="tl-item">
+        <div class="tl-dot m1">1</div>
+        <div class="tl-content">
+          <div class="tl-period">Месяц 1</div>
+          <div class="tl-name">Выбор + Запуск</div>
+          <div class="tl-result">Ниша выбрана, сайт готов</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot m2">2</div>
+        <div class="tl-content">
+          <div class="tl-period">Месяц 2</div>
+          <div class="tl-name">Контент + SEO</div>
+          <div class="tl-result">100+ статей, оптимизировано</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot m3">3</div>
+        <div class="tl-content">
+          <div class="tl-period">Месяц 3</div>
+          <div class="tl-name">Автоматизация + Запуск</div>
+          <div class="tl-result"><span class="accent">Первые $500-1.5K/мес</span></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot m46">4-6</div>
+        <div class="tl-content">
+          <div class="tl-period">Месяцы 4-6</div>
+          <div class="tl-name">Масштабирование</div>
+          <div class="tl-result"><span class="accent">$2-4K/мес стабильно</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages" class="packages-section">
+  <div class="container">
+    <div class="section-label reveal">// выбери пакет</div>
+    <h2 class="section-title reveal">Два пути к<br><span class="l">своему бизнесу</span></h2>
+    <div class="packages-grid">
+
+      <!-- BASIC -->
+      <div class="package-card reveal">
+        <div class="package-tag basic">Базовый</div>
+        <div class="package-name">Старт</div>
+        <div class="package-price">199 990 ₽</div>
+        <div class="package-note">1 микробизнес · 3 месяца создания + 3 месяца поддержки</div>
+        <div class="package-divider"></div>
+        <ul class="package-features">
+          <li><span class="feat-check">✓</span>Анализ ниши и выбор с гарантией потенциала</li>
+          <li><span class="feat-check">✓</span>Разработка сайта на современном стеке</li>
+          <li><span class="feat-check">✓</span>Написание 100+ SEO-статей (Claude AI)</li>
+          <li><span class="feat-check">✓</span>Оптимизация каждой статьи (Surfer SEO)</li>
+          <li><span class="feat-check">✓</span>Генерация изображений (DALL-E 3)</li>
+          <li><span class="feat-check">✓</span>Внутренняя перелинковка</li>
+          <li><span class="feat-check">✓</span>Настройка автоматизации (Make/n8n)</li>
+          <li><span class="feat-check">✓</span>Настройка монетизации</li>
+          <li><span class="feat-check">✓</span>3 месяца поддержки и обучения</li>
+          <li><span class="feat-check">✓</span>Еженедельные синки в первый месяц</li>
+        </ul>
+        <button class="package-btn" onclick="window.open('https://t.me/cybergipsybot?start=create_basic')">Начать — 199 990 ₽</button>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="package-card featured reveal">
+        <div class="package-tag premium">Премиум</div>
+        <div class="package-name">Масштаб</div>
+        <div class="package-price">499 990 ₽</div>
+        <div class="package-note">2 микробизнеса · 6 месяцев создания + поддержки + помощь в exit</div>
+        <div class="package-divider" style="background: rgba(255,53,184,0.2);"></div>
+        <ul class="package-features">
+          <li><span class="feat-check">✓</span>Всё из базового пакета × 2 бизнеса</li>
+          <li><span class="feat-check">✓</span>Видео-контент (Synthesia AI)</li>
+          <li><span class="feat-check">✓</span>Shorts и Reels (Opus Clip)</li>
+          <li><span class="feat-check">✓</span>Премиум инструменты (Ahrefs, Midjourney)</li>
+          <li><span class="feat-check">✓</span>6 месяцев поддержки и обучения</li>
+          <li><span class="feat-check">✓</span>Еженедельные стратегические сессии</li>
+          <li><span class="feat-check">✓</span>Персональный AI advisor</li>
+          <li><span class="feat-check">✓</span>Помощь в упаковке для exit-сделки</li>
+          <li><span class="feat-check">✓</span>Помощь в продаже бизнеса</li>
+          <li><span class="feat-check">✓</span>Бесплатная консультация по след. проекту</li>
+        </ul>
+        <button class="package-btn" onclick="window.open('https://t.me/cybergipsybot?start=create_premium')">Начать — 499 990 ₽</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="container">
+    <div class="section-label reveal">// как это происходит</div>
+    <h2 class="section-title reveal">Каждый этап.<br><span class="l">Детально.</span></h2>
+    <div class="phases">
+      <div class="phase reveal">
+        <div class="phase-period">
+          <div class="phase-num">ЭТАП</div>
+          <div class="phase-time p1">Месяц 1</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title">Выбор ниши и запуск сайта</div>
+          <p class="phase-desc">Анализируем твои интересы и опыт. Ищем нишу с высоким спросом, слабой конкуренцией и монетизационным потенциалом. Разрабатываем сайт с правильной SEO-архитектурой и быстрой загрузкой.</p>
+        </div>
+        <div class="phase-result">
+          <div class="phase-result-label">Результат</div>
+          <div class="phase-result-val">Сайт готов к наполнению</div>
+        </div>
+      </div>
+      <div class="phase reveal">
+        <div class="phase-period">
+          <div class="phase-num">ЭТАП</div>
+          <div class="phase-time p2">Месяц 2</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title">Контент-машина и SEO</div>
+          <p class="phase-desc">Собираем 100-200 ключевых слов, выстраиваем контент-кластеры. Claude пишет 100+ SEO-статей, Surfer SEO оптимизирует каждую, DALL-E генерирует изображения. Выстраиваем перелинковку.</p>
+        </div>
+        <div class="phase-result">
+          <div class="phase-result-label">Результат</div>
+          <div class="phase-result-val">100+ статей опубликовано</div>
+        </div>
+      </div>
+      <div class="phase reveal">
+        <div class="phase-period">
+          <div class="phase-num">ЭТАП</div>
+          <div class="phase-time p3">Месяц 3</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title">Автоматизация и первые деньги</div>
+          <p class="phase-desc">Настраиваем Make/n8n воркфлоу для автопубликации нового контента. Подключаем монетизацию (AdSense, CPA, аффилиаты). Первые поисковые позиции — первые деньги.</p>
+        </div>
+        <div class="phase-result">
+          <div class="phase-result-label">Результат</div>
+          <div class="phase-result-val">$500–1 500 / мес</div>
+        </div>
+      </div>
+      <div class="phase reveal">
+        <div class="phase-period">
+          <div class="phase-num">ЭТАП</div>
+          <div class="phase-time p4">Мес. 4–6</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title">Масштабирование и поддержка</div>
+          <p class="phase-desc">Трафик продолжает расти. Ты получаешь еженедельные консультации, учишься управлять бизнесом самостоятельно. В Премиум пакете — готовим к exit-сделке или запуску второго проекта.</p>
+        </div>
+        <div class="phase-result">
+          <div class="phase-result-label">Результат</div>
+          <div class="phase-result-val">$2 000–4 000 / мес</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools-section">
+  <div class="container">
+    <div class="section-label reveal">// инструменты</div>
+    <h2 class="section-title reveal">Весь AI стек<br><span class="l">в твоих руках</span></h2>
+    <div class="tools-grid">
+      <div class="tool-item reveal">
+        <div class="tool-cat">Контент</div>
+        <div class="tool-name">Claude AI</div>
+        <div class="tool-use">SEO-статьи, описания, тексты для сайта</div>
+      </div>
+      <div class="tool-item reveal">
+        <div class="tool-cat">SEO</div>
+        <div class="tool-name">Surfer SEO</div>
+        <div class="tool-use">Оптимизация каждой статьи под топ-10</div>
+      </div>
+      <div class="tool-item reveal">
+        <div class="tool-cat">Код</div>
+        <div class="tool-name">Cursor + Codex</div>
+        <div class="tool-use">Разработка сайта в 10× быстрее</div>
+      </div>
+      <div class="tool-item reveal">
+        <div class="tool-cat">Изображения</div>
+        <div class="tool-name">DALL-E 3</div>
+        <div class="tool-use">Обложки и иллюстрации для статей</div>
+      </div>
+      <div class="tool-item reveal">
+        <div class="tool-cat">Автоматизация</div>
+        <div class="tool-name">Make / n8n</div>
+        <div class="tool-use">Автопубликация и workflow-процессы</div>
+      </div>
+      <div class="tool-item reveal">
+        <div class="tool-cat">Аналитика</div>
+        <div class="tool-name">Ahrefs</div>
+        <div class="tool-use">Семантика, мониторинг позиций (Премиум)</div>
+      </div>
+      <div class="tool-item reveal">
+        <div class="tool-cat">Видео</div>
+        <div class="tool-name">Synthesia AI</div>
+        <div class="tool-use">Видео с AI-аватаром (Премиум)</div>
+      </div>
+      <div class="tool-item reveal">
+        <div class="tool-cat">Шорты</div>
+        <div class="tool-name">Opus Clip</div>
+        <div class="tool-use">Reels и Shorts из длинного контента (Премиум)</div>
+      </div>
+      <div class="tool-item reveal">
+        <div class="tool-cat">База знаний</div>
+        <div class="tool-name">Obsidian</div>
+        <div class="tool-use">Структура, семантика, перелинковка</div>
+      </div>
+      <div class="tool-item reveal">
+        <div class="tool-cat">Исследование</div>
+        <div class="tool-name">NotebookLM</div>
+        <div class="tool-use">Анализ рынка и конкурентов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="compare-section">
+  <div class="container">
+    <div class="section-label reveal">// сравнение пакетов</div>
+    <h2 class="section-title reveal">Базовый vs <span class="l">Премиум</span></h2>
+    <div class="reveal" style="overflow-x: auto;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Включено</th>
+            <th class="h-basic">Базовый — 199 990 ₽</th>
+            <th class="h-premium">Премиум — 499 990 ₽</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Количество бизнесов</td><td class="yes">1</td><td class="yes-m">2</td></tr>
+          <tr><td>Длительность поддержки</td><td class="yes">3 месяца</td><td class="yes-m">6 месяцев</td></tr>
+          <tr><td>Выбор ниши + анализ</td><td class="yes">✓</td><td class="yes-m">✓</td></tr>
+          <tr><td>Разработка сайта</td><td class="yes">✓</td><td class="yes-m">✓</td></tr>
+          <tr><td>100+ SEO-статей</td><td class="yes">✓</td><td class="yes-m">✓ × 2</td></tr>
+          <tr><td>Автоматизация Make/n8n</td><td class="yes">✓</td><td class="yes-m">✓</td></tr>
+          <tr><td>Видео-контент (Synthesia)</td><td>—</td><td class="yes-m">✓</td></tr>
+          <tr><td>Shorts / Reels (Opus Clip)</td><td>—</td><td class="yes-m">✓</td></tr>
+          <tr><td>Ahrefs + Midjourney</td><td>—</td><td class="yes-m">✓</td></tr>
+          <tr><td>Еженедельные стратсессии</td><td>—</td><td class="yes-m">✓</td></tr>
+          <tr><td>Персональный AI advisor</td><td>—</td><td class="yes-m">✓</td></tr>
+          <tr><td>Помощь в exit-сделке</td><td>—</td><td class="yes-m">✓</td></tr>
+          <tr><td>ROI (консервативный, 1 год)</td><td class="yes">~3.5M ₽</td><td class="yes-m">~7M ₽</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <h2 class="cta-title reveal">Готов запустить<br><span class="m">свой</span> <span class="l">бизнес?</span></h2>
+    <p class="cta-desc reveal">Напиши в бот — проведём бесплатную 30-минутную консультацию, выберем нишу и пакет. Старт через 3 дня после оплаты.</p>
+    <div class="cta-buttons reveal">
+      <a href="https://t.me/cybergipsybot" target="_blank" class="btn-primary">🚀 Бесплатная консультация</a>
+      <a href="buy-business.html" class="btn-ghost">🛍️ Купить готовый →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="cybergipsy_website_v2.html" class="footer-logo"><span class="cy">Cyber</span><span class="gi">Gipsy</span></a>
+  <div class="footer-links">
+    <a href="cybergipsy_website_v2.html">Главная</a>
+    <a href="cybergipsy_model.html">Модель</a>
+    <a href="buy-business.html">Купить бизнес</a>
+    <a href="https://t.me/cybergipsyclub" target="_blank">Telegram</a>
+  </div>
+  <div class="footer-copy">© 2025 CyberGipsy</div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Купить готовый AI бизнес — CyberGipsy</title>
+<meta name="description" content="Готовые AI микробизнесы с доказанным доходом от 700 000 ₽. Трафик, автоматизация, доход с первого дня.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #090c10;
+  --surface: #0e1318;
+  --card: #131920;
+  --card-hover: #171f28;
+  --border: rgba(255,255,255,0.06);
+  --border-bright: rgba(255,255,255,0.12);
+  --lime: #b8ff35;
+  --lime-dim: rgba(184,255,53,0.12);
+  --lime-glow: rgba(184,255,53,0.25);
+  --cyan: #35d4ff;
+  --cyan-dim: rgba(53,212,255,0.1);
+  --text: #e8edf3;
+  --text-muted: #6b7a8d;
+  --text-dim: #3d4a58;
+  --shadow: 0 24px 80px rgba(0,0,0,0.6);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background: var(--black);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* NOISE OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(9,12,16,0.85);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 1.3rem; letter-spacing: 2px;
+  text-decoration: none;
+}
+.nav-logo .cy { color: var(--lime); }
+.nav-logo .gi { color: var(--cyan); }
+
+.nav-links { display: flex; gap: 40px; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--lime); }
+
+.nav-btn {
+  background: var(--lime) !important; color: var(--black) !important;
+  padding: 9px 24px !important; border-radius: 4px !important;
+  font-weight: 700 !important; letter-spacing: 0 !important;
+  font-family: 'Syne', sans-serif !important;
+  font-size: 0.85rem !important;
+  transition: all 0.3s !important;
+}
+.nav-btn:hover { box-shadow: 0 0 24px var(--lime-glow) !important; }
+
+/* HERO */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 140px 48px 80px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-blob {
+  position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15;
+  pointer-events: none;
+}
+.hero-blob-1 { width: 600px; height: 600px; background: var(--lime); top: -10%; right: -5%; }
+.hero-blob-2 { width: 400px; height: 400px; background: var(--cyan); bottom: 0; left: -5%; }
+
+.hero-inner { position: relative; z-index: 2; max-width: 1300px; margin: 0 auto; width: 100%; }
+
+.hero-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem; color: var(--lime);
+  letter-spacing: 4px; text-transform: uppercase;
+  margin-bottom: 32px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  font-weight: 800; line-height: 0.95;
+  letter-spacing: -2px; margin-bottom: 40px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
+}
+.hero-title .accent { color: var(--lime); }
+.hero-title .block {
+  display: block;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+  color: transparent;
+}
+
+.hero-desc {
+  font-size: 1.15rem; color: var(--text-muted);
+  max-width: 560px; line-height: 1.75; margin-bottom: 52px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
+}
+
+.hero-stats {
+  display: flex; gap: 48px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
+}
+.hero-stat {}
+.hero-stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.5rem; font-weight: 800; color: var(--lime);
+  line-height: 1;
+}
+.hero-stat-label {
+  font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;
+  font-family: 'Space Mono', monospace; letter-spacing: 1px;
+}
+
+.hero-scroll {
+  position: absolute; bottom: 48px; left: 48px;
+  font-family: 'Space Mono', monospace; font-size: 0.7rem;
+  color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0; animation: fadeUp 0.8s ease 1s forwards;
+}
+.hero-scroll::before {
+  content: '';
+  width: 40px; height: 1px; background: var(--text-dim);
+}
+
+/* WHAT IS */
+.what-section {
+  position: relative; z-index: 1;
+  padding: 120px 48px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.container { max-width: 1300px; margin: 0 auto; }
+
+.section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem; color: var(--lime);
+  letter-spacing: 4px; text-transform: uppercase; margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800; line-height: 1.1;
+  letter-spacing: -1px; margin-bottom: 64px;
+}
+
+.what-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+}
+
+.what-item {
+  background: var(--card);
+  padding: 48px 40px;
+  border: 1px solid var(--border);
+  transition: all 0.4s;
+  position: relative; overflow: hidden;
+}
+.what-item::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--lime), var(--cyan));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s;
+}
+.what-item:hover { background: var(--card-hover); }
+.what-item:hover::after { transform: scaleX(1); }
+
+.what-icon {
+  font-size: 2.5rem; margin-bottom: 20px; display: block;
+}
+.what-title {
+  font-family: 'Syne', sans-serif; font-size: 1.3rem;
+  font-weight: 700; margin-bottom: 12px; color: var(--text);
+}
+.what-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+
+/* INCLUDES */
+.includes-section {
+  position: relative; z-index: 1; padding: 120px 48px;
+}
+
+.includes-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+
+.include-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 36px 28px; border-radius: 2px;
+  transition: all 0.4s;
+  position: relative;
+}
+.include-card:hover {
+  border-color: var(--border-bright);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+}
+
+.include-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem; color: var(--lime);
+  letter-spacing: 3px; margin-bottom: 20px;
+}
+
+.include-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem; font-weight: 700;
+  margin-bottom: 10px; color: var(--text);
+}
+
+.include-desc {
+  font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;
+}
+
+/* PRICING */
+.pricing-section {
+  background: var(--surface); border-top: 1px solid var(--border);
+  position: relative; z-index: 1; padding: 120px 48px;
+}
+
+.pricing-intro {
+  max-width: 680px; margin-bottom: 80px;
+}
+
+.pricing-desc {
+  font-size: 1.05rem; color: var(--text-muted); line-height: 1.8;
+}
+
+.pricing-tiers {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+}
+
+.tier {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 48px 36px;
+  position: relative; overflow: hidden;
+  transition: all 0.4s;
+}
+.tier.featured {
+  background: var(--lime);
+  border-color: var(--lime);
+}
+.tier:hover { transform: translateY(-4px); }
+
+.tier-name {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.tier-name { color: var(--text-muted); }
+.tier.featured .tier-name { color: rgba(0,0,0,0.5); }
+
+.tier-price {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.8rem; font-weight: 800; line-height: 1;
+  margin-bottom: 8px;
+}
+.tier-price { color: var(--lime); }
+.tier.featured .tier-price { color: var(--black); }
+
+.tier-sub {
+  font-size: 0.85rem; margin-bottom: 36px;
+  color: var(--text-muted);
+}
+.tier.featured .tier-sub { color: rgba(0,0,0,0.5); }
+
+.tier-features {
+  list-style: none; margin-bottom: 36px;
+}
+.tier-features li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.tier.featured .tier-features li {
+  border-bottom-color: rgba(0,0,0,0.1);
+  color: var(--black);
+}
+.tier-features li::before {
+  content: '✓';
+  color: var(--lime); font-weight: 700;
+}
+.tier.featured .tier-features li::before { color: var(--black); }
+
+.tier-btn {
+  width: 100%; padding: 14px;
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 0.95rem; letter-spacing: 0.5px;
+  border: none; cursor: pointer; transition: all 0.3s;
+  border-radius: 2px;
+}
+.tier-btn { background: var(--lime); color: var(--black); }
+.tier.featured .tier-btn { background: var(--black); color: var(--lime); }
+.tier-btn:hover { opacity: 0.85; }
+
+/* FACTORS */
+.factors-section {
+  position: relative; z-index: 1; padding: 120px 48px;
+}
+
+.factors-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+}
+
+.factors-left {}
+.factors-right {
+  background: var(--card); border: 1px solid var(--border);
+  padding: 48px 40px;
+}
+
+.factor-item {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+.factor-item:last-child { border-bottom: none; }
+
+.factor-label {
+  font-family: 'Space Mono', monospace; font-size: 0.72rem;
+  color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.factor-title {
+  font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700;
+  color: var(--text); margin-bottom: 6px;
+}
+.factor-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+.roi-title {
+  font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700;
+  margin-bottom: 28px;
+}
+.roi-row {
+  display: flex; justify-content: space-between;
+  padding: 14px 0; border-bottom: 1px solid var(--border);
+}
+.roi-row:last-child { border-bottom: none; padding-top: 20px; border-top: 1px solid var(--lime); }
+.roi-label { font-size: 0.9rem; color: var(--text-muted); }
+.roi-value { font-family: 'Space Mono', monospace; font-size: 0.95rem; color: var(--lime); font-weight: 700; }
+
+/* PROCESS */
+.process-section {
+  background: var(--surface); border-top: 1px solid var(--border);
+  position: relative; z-index: 1; padding: 120px 48px;
+}
+
+.process-steps {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px;
+}
+
+.process-step {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 40px 28px;
+  position: relative;
+  transition: all 0.3s;
+}
+.process-step:hover { background: var(--card-hover); }
+
+.step-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 3.5rem; font-weight: 800;
+  color: var(--lime); opacity: 0.15;
+  line-height: 1; margin-bottom: 16px;
+}
+.step-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem; font-weight: 700; margin-bottom: 10px;
+}
+.step-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+/* FAQ */
+.faq-section {
+  position: relative; z-index: 1; padding: 120px 48px;
+}
+.faq-list { max-width: 800px; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.faq-q {
+  padding: 24px 0; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 600;
+  transition: color 0.3s;
+}
+.faq-q:hover { color: var(--lime); }
+.faq-icon {
+  font-size: 1.4rem; color: var(--lime);
+  transition: transform 0.3s; flex-shrink: 0; margin-left: 16px;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s;
+  font-size: 0.95rem; color: var(--text-muted); line-height: 1.75;
+}
+.faq-item.open .faq-a { max-height: 300px; padding-bottom: 24px; }
+
+/* CTA */
+.cta-section {
+  position: relative; z-index: 1; padding: 120px 48px;
+  text-align: center; overflow: hidden;
+}
+.cta-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(184,255,53,0.06), rgba(53,212,255,0.04));
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.cta-inner { position: relative; z-index: 2; }
+.cta-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 800; line-height: 1.05; margin-bottom: 24px;
+}
+.cta-title .lime { color: var(--lime); }
+.cta-desc { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 48px; max-width: 560px; margin-left: auto; margin-right: auto; }
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 40px; background: var(--lime); color: var(--black);
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+  text-decoration: none; border: none; cursor: pointer; border-radius: 2px;
+  transition: all 0.3s;
+}
+.btn-primary:hover { box-shadow: 0 0 40px var(--lime-glow); transform: translateY(-2px); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 40px; background: transparent; color: var(--text);
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+  text-decoration: none; border: 1px solid var(--border-bright); border-radius: 2px;
+  transition: all 0.3s; cursor: pointer;
+}
+.btn-ghost:hover { border-color: var(--lime); color: var(--lime); }
+
+/* FOOTER */
+footer {
+  background: var(--black); border-top: 1px solid var(--border);
+  position: relative; z-index: 1; padding: 48px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;
+}
+.footer-logo {
+  font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; letter-spacing: 2px; text-decoration: none;
+}
+.footer-links { display: flex; gap: 32px; }
+.footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+.footer-links a:hover { color: var(--lime); }
+.footer-copy { font-size: 0.8rem; color: var(--text-dim); font-family: 'Space Mono', monospace; }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 120px 20px 60px; }
+  .hero-title { font-size: 3rem; }
+  .what-section, .includes-section, .pricing-section, .factors-section,
+  .process-section, .faq-section, .cta-section { padding: 80px 20px; }
+  .what-grid, .includes-grid, .pricing-tiers, .factors-grid, .process-steps { grid-template-columns: 1fr; }
+  .tier.featured { order: -1; }
+  footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="cybergipsy_website_v2.html" class="nav-logo"><span class="cy">Cyber</span><span class="gi">Gipsy</span></a>
+  <div class="nav-links">
+    <a href="cybergipsy_website_v2.html">← Главная</a>
+    <a href="cybergipsy_model.html">Модель</a>
+    <a href="create-business.html">Создать бизнес</a>
+    <a href="https://t.me/cybergipsybot" target="_blank" class="nav-btn">Консультация</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-inner">
+    <div class="hero-label">// marketplace · готовые ai бизнесы</div>
+    <h1 class="hero-title">
+      Купи бизнес.<br>
+      <span class="accent">Зарабатывай</span><br>
+      <span class="block">с первого дня.</span>
+    </h1>
+    <p class="hero-desc">
+      Готовые AI микробизнесы с доказанным органическим трафиком, автоматизацией и стабильным доходом. Никаких гипотез — только работающие активы.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">$2-5K</div>
+        <div class="hero-stat-label">Доход / мес</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">60</div>
+        <div class="hero-stat-label">Дней поддержки</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4-6</div>
+        <div class="hero-stat-label">Мес окупаемость</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Автоматизация</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">Подробнее</div>
+</section>
+
+<!-- WHAT IS -->
+<section class="what-section">
+  <div class="container">
+    <div class="section-label reveal">// что ты получаешь</div>
+    <h2 class="section-title reveal">Готовый актив,<br>а не проект</h2>
+    <div class="what-grid">
+      <div class="what-item reveal">
+        <span class="what-icon">📈</span>
+        <div class="what-title">Доказанный доход</div>
+        <p class="what-desc">Каждый бизнес в каталоге имеет подтверждённую историю дохода. Никаких обещаний — только реальные цифры за последние 6-12 месяцев.</p>
+      </div>
+      <div class="what-item reveal">
+        <span class="what-icon">🤖</span>
+        <div class="what-title">Полная автоматизация</div>
+        <p class="what-desc">Контент публикуется сам. Трафик приходит органически. Деньги капают без ежедневного участия. Это пассивный актив в прямом смысле.</p>
+      </div>
+      <div class="what-item reveal">
+        <span class="what-icon">🔑</span>
+        <div class="what-title">Ключи от всего</div>
+        <p class="what-desc">Передаём все доступы, инструменты, документацию, SOP-процессы и знания. Бизнес готов работать под твоим управлением с первого дня.</p>
+      </div>
+      <div class="what-item reveal">
+        <span class="what-icon">🛡️</span>
+        <div class="what-title">60 дней поддержки</div>
+        <p class="what-desc">После передачи мы сопровождаем тебя 60 дней. Отвечаем на вопросы, помогаем разобраться и обеспечиваем плавный переход управления.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDES -->
+<section class="includes-section">
+  <div class="container">
+    <div class="section-label reveal">// состав каждого бизнеса</div>
+    <h2 class="section-title reveal">Что входит<br>в сделку</h2>
+    <div class="includes-grid">
+      <div class="include-card reveal">
+        <div class="include-num">01 — САЙТ</div>
+        <div class="include-title">Готовый сайт с трафиком</div>
+        <p class="include-desc">Полностью разработанный сайт с высокой скоростью загрузки, правильной SEO-структурой и органическим трафиком от поисковых систем.</p>
+      </div>
+      <div class="include-card reveal">
+        <div class="include-num">02 — КОНТЕНТ</div>
+        <div class="include-title">100+ SEO-оптимизированных статей</div>
+        <p class="include-desc">Массив качественных статей, написанных с помощью Claude AI и оптимизированных через Surfer SEO. Каждая бьёт в конкретный поисковый запрос.</p>
+      </div>
+      <div class="include-card reveal">
+        <div class="include-num">03 — ТРАФИК</div>
+        <div class="include-title">Органический поисковый трафик</div>
+        <p class="include-desc">Подтверждённый объём посетителей из Google и Яндекс. Данные Analytics и Search Console передаются вместе с бизнесом.</p>
+      </div>
+      <div class="include-card reveal">
+        <div class="include-num">04 — ДОХОД</div>
+        <div class="include-title">Настроенная монетизация</div>
+        <p class="include-desc">Работающие источники дохода: AdSense, CPA-партнёрки, аффилиатные программы или прямые продажи. Всё уже настроено и приносит деньги.</p>
+      </div>
+      <div class="include-card reveal">
+        <div class="include-num">05 — АВТОМАТ</div>
+        <div class="include-title">Система автоматизации</div>
+        <p class="include-desc">Make/n8n воркфлоу, которые автоматически публикуют новый контент, рассылают письма, обновляют данные без твоего участия.</p>
+      </div>
+      <div class="include-card reveal">
+        <div class="include-num">06 — ЗНАНИЯ</div>
+        <div class="include-title">SOP и документация</div>
+        <p class="include-desc">Подробные инструкции по управлению, развитию и масштабированию бизнеса. Понятно написаны даже для человека без технического опыта.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="container">
+    <div class="section-label reveal">// стоимость</div>
+    <h2 class="section-title reveal">Диапазон цен</h2>
+    <div class="pricing-intro reveal">
+      <p class="pricing-desc">Цена каждого микробизнеса рассчитывается индивидуально по 4 ключевым параметрам: доход, возраст, качество трафика и потенциал роста. Конкретные предложения — по запросу после консультации.</p>
+    </div>
+    <div class="pricing-tiers">
+      <div class="tier reveal">
+        <div class="tier-name">Начальный уровень</div>
+        <div class="tier-price">700K–1.2M</div>
+        <div class="tier-sub">₽ · доход $2-3K/мес</div>
+        <ul class="tier-features">
+          <li>Молодой проект (6-12 мес)</li>
+          <li>Стабильный органический трафик</li>
+          <li>Базовая автоматизация</li>
+          <li>Окупаемость ~4-5 месяцев</li>
+          <li>60 дней поддержки</li>
+        </ul>
+        <button class="tier-btn" onclick="window.open('https://t.me/cybergipsybot')">Узнать детали</button>
+      </div>
+      <div class="tier featured reveal">
+        <div class="tier-name">Оптимальный</div>
+        <div class="tier-price">1.2M–2M</div>
+        <div class="tier-sub">₽ · доход $3-5K/мес</div>
+        <ul class="tier-features">
+          <li>Зрелый проект (1-2 года)</li>
+          <li>Высококачественный трафик</li>
+          <li>Полная автоматизация</li>
+          <li>Окупаемость ~4-5 месяцев</li>
+          <li>60 дней поддержки</li>
+        </ul>
+        <button class="tier-btn" onclick="window.open('https://t.me/cybergipsybot')">Узнать детали</button>
+      </div>
+      <div class="tier reveal">
+        <div class="tier-name">Премиум</div>
+        <div class="tier-price">2M–3M</div>
+        <div class="tier-sub">₽ · доход $5K+/мес</div>
+        <ul class="tier-features">
+          <li>Зрелый проект (2-3+ года)</li>
+          <li>Премиум трафик и домен</li>
+          <li>Сложная экосистема</li>
+          <li>Высокий потенциал роста</li>
+          <li>60 дней поддержки</li>
+        </ul>
+        <button class="tier-btn" onclick="window.open('https://t.me/cybergipsybot')">Узнать детали</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACTORS + ROI -->
+<section class="factors-section">
+  <div class="container">
+    <div class="section-label reveal">// как формируется цена</div>
+    <h2 class="section-title reveal">Факторы оценки<br>и ваш ROI</h2>
+    <div class="factors-grid">
+      <div class="factors-left">
+        <div class="factor-item reveal">
+          <div class="factor-label">ФАКТОР 01</div>
+          <div class="factor-title">Месячный доход</div>
+          <p class="factor-desc">Основной параметр. Рассчитывается как среднее за последние 6 месяцев. Чем стабильнее и выше — тем дороже актив.</p>
+        </div>
+        <div class="factor-item reveal">
+          <div class="factor-label">ФАКТОР 02</div>
+          <div class="factor-title">Возраст и история</div>
+          <p class="factor-desc">Старый проект — меньше риск. 2-3-летний бизнес с историей роста ценится значительно выше молодого с таким же доходом.</p>
+        </div>
+        <div class="factor-item reveal">
+          <div class="factor-label">ФАКТОР 03</div>
+          <div class="factor-title">Качество трафика</div>
+          <p class="factor-desc">Органический SEO-трафик из Google ценится выше всего. Платный трафик — риск: стоит выключить рекламу, и бизнес падает.</p>
+        </div>
+        <div class="factor-item reveal">
+          <div class="factor-label">ФАКТОР 04</div>
+          <div class="factor-title">Потенциал роста</div>
+          <p class="factor-desc">Ниши с нераскрытым потенциалом, большим пулом ключевых слов и растущим рынком оцениваются дороже насыщенных.</p>
+        </div>
+      </div>
+      <div class="factors-right reveal">
+        <div class="roi-title">📊 Пример ROI</div>
+        <div class="roi-row">
+          <span class="roi-label">Вложения</span>
+          <span class="roi-value">1 200 000 ₽</span>
+        </div>
+        <div class="roi-row">
+          <span class="roi-label">Доход / месяц</span>
+          <span class="roi-value">280 000 ₽</span>
+        </div>
+        <div class="roi-row">
+          <span class="roi-label">Окупаемость</span>
+          <span class="roi-value">~4-5 месяцев</span>
+        </div>
+        <div class="roi-row">
+          <span class="roi-label">Доход за год</span>
+          <span class="roi-value">3 360 000 ₽</span>
+        </div>
+        <div class="roi-row">
+          <span class="roi-label">Чистая прибыль</span>
+          <span class="roi-value">2 160 000 ₽</span>
+        </div>
+        <div class="roi-row">
+          <span class="roi-label" style="font-weight:700; color: var(--text);">Или продать через год</span>
+          <span class="roi-value" style="font-size:1.1rem;">+1.5M ₽</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="container">
+    <div class="section-label reveal">// как проходит сделка</div>
+    <h2 class="section-title reveal">5 шагов от<br>запроса до дохода</h2>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num">01</div>
+        <div class="step-title">Консультация</div>
+        <p class="step-desc">Обсуждаем твои цели, бюджет и интересные ниши. Подбираем подходящие варианты из каталога.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">02</div>
+        <div class="step-title">Due Diligence</div>
+        <p class="step-desc">Показываем все метрики: Analytics, доходы, историю трафика. Проверяешь всё сам перед решением.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">03</div>
+        <div class="step-title">Договор и оплата</div>
+        <p class="step-desc">Заключаем договор. Фиксируем все условия. Производим безопасную транзакцию.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">04</div>
+        <div class="step-title">Передача</div>
+        <p class="step-desc">Передаём все доступы, инструменты, домен, хостинг, аккаунты монетизации и документацию.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">05</div>
+        <div class="step-title">Поддержка 60 дней</div>
+        <p class="step-desc">Сопровождаем тебя 60 дней. Отвечаем на вопросы, помогаем наладить процессы.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="section-label reveal">// вопросы и ответы</div>
+    <h2 class="section-title reveal">Частые вопросы</h2>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q">Почему нет конкретных примеров в открытом доступе? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Конкретные предложения — конфиденциальны. Показываем каталог после первичной консультации, чтобы убедиться в серьёзности намерений и подобрать подходящий вариант именно для тебя.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Нужен ли технический опыт для управления? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Нет. Всё автоматизировано. SOP-документы написаны простым языком. За 60 дней поддержки ты полностью разберёшься в управлении и сможешь работать самостоятельно.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Как проверить реальность заявленного дохода? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Открываем полный доступ к Google Analytics, Search Console и аккаунтам монетизации перед сделкой. Ты видишь живые данные, а не скриншоты.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Можно ли потом перепродать купленный бизнес? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Да. Это и есть стратегия: купить, развить ещё больше, продать дороже. Мы помогаем и в этом — у нас есть опыт упаковки бизнесов для exit-сделок.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Что если после покупки доход упадёт? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Органический SEO-трафик стабилен — это не реклама, которую можно выключить. За 60 дней поддержки мы помогаем справиться с любыми нестандартными ситуациями.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <h2 class="cta-title reveal">Готов купить<br><span class="lime">работающий актив?</span></h2>
+    <p class="cta-desc reveal">Напиши в бот — покажем каталог, ответим на вопросы и поможем выбрать подходящий бизнес под твой бюджет.</p>
+    <div class="cta-buttons reveal">
+      <a href="https://t.me/cybergipsybot" target="_blank" class="btn-primary">💬 Запросить каталог</a>
+      <a href="create-business.html" class="btn-ghost">🏗️ Создать свой →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="cybergipsy_website_v2.html" class="footer-logo"><span class="cy">Cyber</span><span class="gi">Gipsy</span></a>
+  <div class="footer-links">
+    <a href="cybergipsy_website_v2.html">Главная</a>
+    <a href="cybergipsy_model.html">Модель</a>
+    <a href="create-business.html">Создать бизнес</a>
+    <a href="https://t.me/cybergipsyclub" target="_blank">Telegram</a>
+  </div>
+  <div class="footer-copy">© 2025 CyberGipsy</div>
+</footer>
+
+<script>
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => obs.observe(el));
+
+// FAQ
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    item.classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>
